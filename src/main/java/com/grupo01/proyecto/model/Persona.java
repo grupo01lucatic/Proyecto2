@@ -1,6 +1,6 @@
 package com.grupo01.proyecto.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
-1  * Nombre: Direcciones
+1  * Nombre: Persona
 2  * Descripcion: Clase con setter/getter, constructor (default) y toString
 3  * Fecha: 14.05.2019
 4  * @version 1.0

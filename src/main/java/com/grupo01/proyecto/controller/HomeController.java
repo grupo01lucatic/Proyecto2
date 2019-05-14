@@ -17,7 +17,7 @@ import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.services.IPersonaService;
 
 /**
- * Clase MenuController. Esta clase es la controladora de la vista. 14/05/2019
+ * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
  * 
  * @version 1.0
  * @author grupo01
