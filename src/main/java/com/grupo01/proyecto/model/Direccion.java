@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
-1  * Nombre: Direcciones
+1  * Nombre: Direccion
 2  * Descripcion: Clase con setter/getter, constructor (default) y toString
 3  * Fecha: 14.05.2019
 4  * @version 1.0
