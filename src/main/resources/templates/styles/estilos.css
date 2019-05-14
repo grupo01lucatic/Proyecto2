@@ -1,0 +1,72 @@
+/* Globals */
+main > .container {
+    padding: 100px 15px 0;
+}
+
+body {
+    background-color: #F5F0EE;
+}
+
+header .input-group {
+    padding-top: 10px
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    padding: 20px;
+    color: #343a40;
+}
+
+span {
+    padding: 10px;
+    font-size: 1.5em;
+}
+
+#izquierdo {
+    width: 35%;
+    height: 40%;
+    background-color: white;
+    font-size: 1em;
+    margin: 1%;
+    margin-left: 10%;
+    padding: 50px;
+    border: solid 2px #BBB5B2;
+    float: left;
+}
+
+i {
+    padding: 5px;
+}
+
+#derecho {
+    width: 35%;
+    height: 100%;
+    background-color: white;
+    font-size: 1em;
+    margin: 1%;
+    margin-left: 10%;
+    padding: 50px;
+    border: solid 2px #BBB5B2;
+    float: left;
+    align-content: center;
+    text-align: center;
+}
+
+.btn-lg {
+    display: block;
+    float: none;
+    margin: 1.5em;
+    align-content: center;
+    position:relative;
+    display: block; 
+    margin: 5 auto;
+    width: 80%;
+    
+}
+.center{
+    text-align: center;
+}
+#botonOculto {
+display: none;
+}
