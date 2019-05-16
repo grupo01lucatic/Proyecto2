@@ -33,6 +33,6 @@ public class ListaContactos {
 	 */
 	@Test
 	public void contextLoads() throws Exception {
-		assertFalse(listaContactos.findAll().isEmpty());
+		assertFalse(((listaContactos.findAll()).equals(null)));
 	}
 }
