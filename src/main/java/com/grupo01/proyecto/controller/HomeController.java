@@ -84,21 +84,21 @@ public class HomeController {
 	 *         raiz.
 	 * @version 1.0
 	 */
-	@RequestMapping(value="/createuser", method=RequestMethod.POST)
-	//@Valid, BindingResult necesarios para validar los campos
+	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
+	// @Valid, BindingResult necesarios para validar los campos
 	public String guardar(@Valid Persona cliente, BindingResult result, Model model, SessionStatus status) {
-	personaservice.save(cliente);
+		personaservice.save(cliente);
 		status.setComplete();
 		return "redirect:/";
 	}
-	
-	@RequestMapping(value="/Detalle/{id}")  // En la vista tiene que que llevar 
-	public String Detalle(@PathVariable(value="id") Long id, Map<String,Object> model) {
+
+	@RequestMapping(value = "/Detalle/{id}") // En la vista tiene que que llevar
+	public String Detalle(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 		Persona persona = null;
-	
-		if(id>0) {
+
+		if (id > 0) {
 			persona = personaservice.findOne(id);
-		}else {
+		} else {
 			return "redirect:/Index";
 		}
 		model.put("persona", persona);
@@ -131,21 +131,39 @@ public class HomeController {
 		logger.info("Se han listado los contactos");
 		return "DetalleContactos";
 	}
-	
+
 	/**
-	 * Metodo para eliminar un contacto al darle click en el boton que llama al metodo en servicio que usa el id del contacto para eliminarlo. 
+	 * Metodo para eliminar un contacto al darle click en el boton que llama al
+	 * metodo en servicio que usa el id del contacto para eliminarlo.
+	 * 
 	 * @author Jara Dominguez
 	 * @date 16.05.2019
 	 * @param model
 	 * @param id
 	 * @return Manda a la vista de listado de contactos
 	 */
-	
+
 	@PostMapping("/{id}/delete")
 	public String eliminarContacto(Model model, @PathVariable long id) {
 		personaservice.delete(id);
 		logger.info("Se ha borrado el contacto");
 		return "redirect:/ListarContactos";
 	}
-	
+
+	/**
+	 * Metodo para mostrar la vista de todas las provincias disponibles que llama a
+	 * provinciaservice.
+	 * 
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @param model
+	 * @return Manda a la vista de listado de provincias
+	 */
+
+	@GetMapping("/ListarProvincias")
+	public String listarProvincias(Model model) {
+		model.addAttribute("provincias", provinciaservice.findAll());
+		logger.info("Se han listado las provincias");
+		return "ListarProvincias";
+	}
 }
