@@ -142,21 +142,39 @@ public class HomeController {
 		logger.info("Contacto modificado");
 		return "redirect:/ListarContactos";
 	}
-	
+
 	/**
-	 * Metodo para eliminar un contacto al darle click en el boton que llama al metodo en servicio que usa el id del contacto para eliminarlo. 
+	 * Metodo para eliminar un contacto al darle click en el boton que llama al
+	 * metodo en servicio que usa el id del contacto para eliminarlo.
+	 * 
 	 * @author Jara Dominguez
 	 * @date 16.05.2019
 	 * @param model
 	 * @param id
 	 * @return Manda a la vista de listado de contactos
 	 */
-	
+
 	@PostMapping("/{id}/delete")
 	public String eliminarContacto(Model model, @PathVariable long id) {
 		personaservice.delete(id);
 		logger.info("Se ha borrado el contacto");
 		return "redirect:/ListarContactos";
 	}
-	
+
+	/**
+	 * Metodo para mostrar la vista de todas las provincias disponibles que llama a
+	 * provinciaservice.
+	 * 
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @param model
+	 * @return Manda a la vista de listado de provincias
+	 */
+
+	@GetMapping("/ListarProvincias")
+	public String listarProvincias(Model model) {
+		model.addAttribute("provincias", provinciaservice.findAll());
+		logger.info("Se han listado las provincias");
+		return "ListarProvincias";
+	}
 }
