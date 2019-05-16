@@ -1,6 +1,7 @@
 package com.grupo01.proyecto.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
@@ -119,4 +122,20 @@ public class HomeController {
 		logger.info("Se han listado los contactos");
 		return "DetalleContactos";
 	}
+	
+	/**
+	 * Metodo para eliminar un contacto al darle click en el boton que llama al metodo en servicio que usa el id del contacto para eliminarlo. 
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @param model
+	 * @param id
+	 * @return Manda a la vista de listado de contactos
+	 */
+	
+	@PostMapping("/{id}/delete")
+	public String eliminarContacto(Model model, @PathVariable long id) {
+		personaservice.delete(id);
+		return "redirect:/ListarContactos";
+	}
+	
 }
