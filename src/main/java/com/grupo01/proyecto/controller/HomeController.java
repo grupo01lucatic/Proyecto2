@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.services.IPersonaService;
-import com.grupo01.proyecto.services.PersonaServiceImpl;
+import com.santiago.ejercicioSpring.model.Producto;
 
 /**
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
@@ -120,16 +121,27 @@ public class HomeController {
 	}
 
 	/**
-	 * @author Santiago Villar Calvo 16.05.2019 Llama a un metodo en servicios que
-	 *         tiene una lista de contacto y muestra la lista en el html
-	 *         DetalleContactos
+	 * @author Santiago Villar Calvo: 16.05.2019 Recoge la id del usuario a editar y
+	 *         muestra sus datos
 	 * @version 1.0
 	 */
-	@GetMapping("/DetalleContactos")
-	public String detalleDeContacto(Model model) {
-		model.addAttribute("personas", personaservice.findAll());
-		logger.info("Se han listado los contactos");
-		return "DetalleContactos";
+	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+	public String editarContacto(@PathVariable(value = "id") Long id, Model model) {
+		Persona persona = null;
+		persona = personaservice.findOne(id);
+		model.addAttribute("detallepersona", persona);
+		return "ListarContactos";
+	}
+
+	/**
+	 * @author Santiago Villar Calvo: 16.05.2019 Sobreescribe el usuario en la DB.
+	 * @version 1.0
+	 */
+	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+	public String guardarProducto(@ModelAttribute Persona persona) {
+		personaservice.save(persona);
+		logger.info("Contacto modificado");
+		return "redirect:/ListarContactos";
 	}
 
 	/**

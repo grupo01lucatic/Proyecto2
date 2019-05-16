@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del contacto</title>
+    <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../static/stilos.css">
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+<body>
+    <header>
+            <nav class="navbar navbar-expand-rg navbar-light bg-dark">
+                <button type="button" th:href="@{/iraListarContacto}" class="btn btn-light navbar-expand-rg float-right">Entrar</button>
+                <button type="button" th:href="@{/iracreateuser}" class="btn btn-light navbar-expand-rg"><i class="fas fa-user-plus"></i> Contacto nuevo</button>
+            </nav>
+    </header>
+	<main role="main" class="flex-shrink-0">
+		<div class="container">
+           <h1>Detalle del contacto</h1>
+            <div>
+                <p th:each="persona: ${personas}"></p>
+            	<p>Nombre: <span th:text="${persona.nombre}"></span></p>
+	            <p>Apellidos: <span th:text="${persona.apellido1} + ${persona.apellido2}"></span></p>
+	            <p>Fecha de nacimiento: <span th:text="${persona.fechanacimiento}"></span></p>
+	            <p>DNI: <span th:text="${persona.dni}"></span></p>
+	            <p>Telefono: <span th:each="telefono: ${persona.telefonos}"></span></p>
+	            <p th:text="${telefono.telefono}"></p>
+	            <p>Direccion: <span th:each="direccion: ${persona.direcciones}"></span></p>
+	            <p th:text="${direccion.direcciones}"></p>
+	            <p>Provincia: <span th:text="${persona.provincia}"></span></p>
+	            <a class="btn btn-warning" th:href="@{/} + ${persona.id} + @{/edit}"><i class="fa fa-pencil-alt"></i> Editar</a>
+	            <a class="btn btn-danger" th:href="@{/} + ${persona.id} + @{/delete}"><i class="fa fa-trash-alt"></i> Eliminar</a>
+            </div>
+		</div>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
