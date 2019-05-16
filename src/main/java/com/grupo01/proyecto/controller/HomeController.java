@@ -1,6 +1,7 @@
 package com.grupo01.proyecto.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,13 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.services.IPersonaService;
-import com.grupo01.proyecto.services.PersonaServiceImpl;
 
 /**
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
@@ -114,5 +117,64 @@ public class HomeController {
 		model.addAttribute("personas", personaservice.findAll());
 		logger.info("Se han mostrado los contactos");
 		return "ListarContactos";
+	}
+
+	/**
+	 * @author Santiago Villar Calvo: 16.05.2019 Recoge la id del usuario a editar y
+	 *         muestra sus datos
+	 * @version 1.0
+	 */
+	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+	public String editarContacto(@PathVariable(value = "id") Long id, Model model) {
+		Persona persona = null;
+		persona = personaservice.findOne(id);
+		model.addAttribute("detallepersona", persona);
+		return "ListarContactos";
+	}
+
+	/**
+	 * @author Santiago Villar Calvo: 16.05.2019 Sobreescribe el usuario en la DB.
+	 * @version 1.0
+	 */
+	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+	public String guardarProducto(@ModelAttribute Persona persona) {
+		personaservice.save(persona);
+		logger.info("Contacto modificado");
+		return "redirect:/ListarContactos";
+	}
+
+	/**
+	 * Metodo para eliminar un contacto al darle click en el boton que llama al
+	 * metodo en servicio que usa el id del contacto para eliminarlo.
+	 * 
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @param model
+	 * @param id
+	 * @return Manda a la vista de listado de contactos
+	 */
+
+	@PostMapping("/{id}/delete")
+	public String eliminarContacto(Model model, @PathVariable long id) {
+		personaservice.delete(id);
+		logger.info("Se ha borrado el contacto");
+		return "redirect:/ListarContactos";
+	}
+
+	/**
+	 * Metodo para mostrar la vista de todas las provincias disponibles que llama a
+	 * provinciaservice.
+	 * 
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @param model
+	 * @return Manda a la vista de listado de provincias
+	 */
+
+	@GetMapping("/ListarProvincias")
+	public String listarProvincias(Model model) {
+		model.addAttribute("provincias", provinciaservice.findAll());
+		logger.info("Se han listado las provincias");
+		return "ListarProvincias";
 	}
 }
