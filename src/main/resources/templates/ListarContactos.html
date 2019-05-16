@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -43,7 +43,7 @@
             </thead>
             <tbody>
                 <tr th:each="persona: ${personas}" class="bg-white">
-                    <td><a th:href="@{/DetalleContacto/} + ${persona.id}" th:text="${persona.nombre}"></a></td>
+                    <td><a th:href="@{/Detalle/} + ${persona.id}" th:text="${persona.nombre}"></a></td>
                     <td th:text="${persona.apellido1}"></td>
                     <td th:text="${persona.apellido2}"></td>
                 </tr>

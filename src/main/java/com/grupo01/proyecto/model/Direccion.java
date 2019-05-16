@@ -11,20 +11,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-
 /**
-1  * Nombre: Direccion
-2  * Descripcion: Clase con setter/getter, constructor (default) y toString
-3  * Fecha: 14.05.2019
-4  * @version 1.0
-5  * @author Sagui Shahnavaz
-*/
+ * 1 * Nombre: Direccion 2 * Descripcion: Clase con setter/getter, constructor
+ * (default) y toString 3 * Fecha: 14.05.2019 4 * @version 1.0 5 * @author Sagui
+ * Shahnavaz
+ */
 
 @Entity
-@Table(name = "direcciones")
+@Table(name = "direccion")
 public class Direccion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,13 +36,29 @@ public class Direccion implements Serializable {
 	private Long idprovincia;
 	private Long idpersona;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idprovincia", referencedColumnName = "idprovincia", insertable=false, updatable=false)
+	private Provincia provincia;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idpersona", referencedColumnName = "idpersona", insertable = false, updatable = false)
 	private Persona persona;
-		
-	public Direccion() {}
 
-	
+	public Direccion() {
+		super();
+	}
+
+	public Direccion(Long id, String direccion, String codpostal, String localidad, Long idprovincia, Long idpersona,
+			Provincia provincia, Persona persona) {
+		super();
+		this.id = id;
+		this.direccion = direccion;
+		this.codpostal = codpostal;
+		this.localidad = localidad;
+		this.idprovincia = idprovincia;
+		this.idpersona = idpersona;
+		this.provincia = provincia;
+		this.persona = persona;
+	}
 
 	public Long getId() {
 		return id;
@@ -95,6 +108,14 @@ public class Direccion implements Serializable {
 		this.idpersona = idpersona;
 	}
 
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
+	}
+
 	public Persona getPersona() {
 		return persona;
 	}
@@ -103,13 +124,15 @@ public class Direccion implements Serializable {
 		this.persona = persona;
 	}
 
-
-
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	@Override
 	public String toString() {
-		return "Direcciones [iddireccion=" + id + ", direccion=" + direccion + ", codpostal=" + codpostal
-				+ ", localidad=" + localidad + ", idprovincia=" + idprovincia + ", idpersona=" + idpersona + "]";
+		return "Direccion [id=" + id + ", direccion=" + direccion + ", codpostal=" + codpostal + ", localidad="
+				+ localidad + ", idprovincia=" + idprovincia + ", idpersona=" + idpersona + ", provincia=" + provincia
+				+ ", persona=" + persona + "]";
 	}
 
 }
