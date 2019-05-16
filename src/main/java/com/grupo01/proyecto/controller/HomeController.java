@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
+import com.grupo01.proyecto.model.Provincia;
 import com.grupo01.proyecto.services.IPersonaService;
 import com.santiago.ejercicioSpring.model.Producto;
 
@@ -138,7 +139,7 @@ public class HomeController {
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public String guardarProducto(@ModelAttribute Persona persona) {
+	public String editarContacto(@ModelAttribute Persona persona) {
 		personaservice.save(persona);
 		logger.info("Contacto modificado");
 		return "redirect:/ListarContactos";
@@ -177,5 +178,34 @@ public class HomeController {
 		model.addAttribute("provincias", provinciaservice.findAll());
 		logger.info("Se han listado las provincias");
 		return "ListarProvincias";
+	}
+	
+	/**
+	 * Metodo para mostrar la vista de alta provincia
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @return Manda a la vista de alta provincia
+	 */
+	
+	@GetMapping("/irAltaProvincias")
+	public String createProvincia() {
+		logger.info("--Iniciada pagina para provincia nueva");
+		return "redirect:/AltaProvincias";
+	}
+	
+	/**
+	 * Guarda la provincia introducida por el usuario en el formulario
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @return Redirecciona a la pagina que muestra el listado de provincias
+	 */
+	
+	
+	@PostMapping("createProvinciaPost")
+	public String guardarProvincia(@Valid Provincia provincia, BindingResult result, Model model, SessionStatus status) {
+		provinciaservice.save(provincia);
+		status.setComplete();
+		logger.info("Se ha creado la provincia");
+		return "redirect:/ListarProvincias";
 	}
 }
