@@ -6,3 +6,6 @@ main > .container {
 h1{
     font-family: 'Lobster', cursive;
 }
+.navbar-brand{
+ color: aqua;   
+}
