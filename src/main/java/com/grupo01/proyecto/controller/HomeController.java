@@ -22,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.model.Provincia;
 import com.grupo01.proyecto.services.IPersonaService;
+import com.grupo01.proyecto.services.IProvinciaService;
 
 /**
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
@@ -33,6 +34,7 @@ import com.grupo01.proyecto.services.IPersonaService;
 @Controller
 public class HomeController {
 	private IPersonaService personaservice;
+	private IProvinciaService provinciaservice;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
