@@ -106,4 +106,17 @@ public class HomeController {
 		logger.info("Se han mostrado los contactos");
 		return "ListarContactos";
 	}
+
+	/**
+	 * @author Santiago Villar Calvo 16.05.2019 Llama a un metodo en servicios que
+	 *         tiene una lista de contacto y muestra la lista en el html
+	 *         DetalleContactos
+	 * @version 1.0
+	 */
+	@GetMapping("/DetalleContactos")
+	public String detalleDeContacto(Model model) {
+		model.addAttribute("personas", personaservice.findAll());
+		logger.info("Se han listado los contactos");
+		return "DetalleContactos";
+	}
 }
