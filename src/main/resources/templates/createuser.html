@@ -20,7 +20,9 @@
     <main role="main" class="flex-shrink-0">
 		<div class="container">
 		    <h1>Crear un contacto nuevo</h1>
-			<form action="#" th:action="@{/createuser}" th:object="${persona}" method="post">
+			
+			<form th:action="@{/createuser}" th:object="${persona}"
+				method="post">
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label for="inputNombre">Nombre</label>
