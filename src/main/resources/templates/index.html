@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Agenda</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/estilos.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+</head>
+<header>
+    <nav class="navbar navbar-expand-rg navbar-light bg-dark">
+        <button type="button" th:href="/listarContacto" class="btn btn-light navbar-expand-rg float-right">Entrar</button>
+    </nav>
+</header>
+
+<body>
+    <h1>Agenda</h1>
+    <div id="izquierdo">
+        <div class="paddign"><i class="far fa-save fa-lg"></i>
+            <span>Guarda tus contactos</span>
+        </div>
+        <br>
+        <div class="paddign">
+            <i class="far fa-address-card fa-lg"></i>
+            <span>Mira tu contactos cuando quieras</span>
+        </div>
+        <br>
+        <div class="paddign">
+            <i class="fas fa-user-edit fa-lg"></i>
+            <span>Modificalos a tu antojo</span>
+        </div>
+        <br>
+        <div class="paddign">
+            <i class="fas fa-user-times fa-lg"></i>
+            <span>Eliminalos cuando lo necesites</span>
+        </div>
+    </div>
+    <div id="derecho">
+        <div class="paddign">
+        <span>Descubre las maravillas de la agenda</span>
+        <br>
+        <span>Unete ahora</span>
+        <div class="botones">
+        <button type="button" class="btn btn-outline-dark btn-lg">Iniciar Sesion</button>
+        <button type="button" class="btn btn-outline-dark btn-lg">Registrarse</button>
+        </div>
+        </div>
+    </div>
+
+
+</body>
