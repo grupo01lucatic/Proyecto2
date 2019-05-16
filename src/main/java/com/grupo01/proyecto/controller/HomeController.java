@@ -156,4 +156,20 @@ public class HomeController {
 		return "redirect:/ListarContactos";
 	}
 
+	/**
+	 * Metodo para mostrar la vista de todas las provincias disponibles que llama a
+	 * provinciaservice.
+	 * 
+	 * @author Jara Dominguez
+	 * @date 16.05.2019
+	 * @param model
+	 * @return Manda a la vista de listado de provincias
+	 */
+
+	@GetMapping("/ListarProvincias")
+	public String listarProvincias(Model model) {
+		model.addAttribute("provincias", provinciaservice.findAll());
+		logger.info("Se han listado las provincias");
+		return "ListarProvincias";
+	}
 }
