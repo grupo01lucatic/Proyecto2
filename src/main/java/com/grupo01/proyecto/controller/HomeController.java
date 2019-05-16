@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +38,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 		logger.info("-- iniciada pagina de bienvenida");
-		return "index";
+		return "createuser";
 	}
 
 	/**
@@ -68,10 +69,9 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/createuser", method = RequestMethod.GET)
 	public String crear(Map<String, Object> model) {
-		Persona persona = new Persona();
-		model.put("persona", persona);
-		logger.info("Se ha creado un nuevo contacto");
-		return "createuser";
+		Persona cliente = new Persona();
+		model.put("persona", cliente);
+		return "create";
 	}
 
 	/**
@@ -81,17 +81,26 @@ public class HomeController {
 	 *         raiz.
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
-	// @Valid, BindingResult necesarios para validar los campos
-	public String guardar(@Valid Persona persona, BindingResult result, Model model, SessionStatus status) {
-		if (result.hasErrors()) {
-			logger.info("No se ha añadido ningun registro, porque hay errores");
-			return "createuser";
-		}
-		personaservice.save(persona);
+	@RequestMapping(value="/createuser", method=RequestMethod.POST)
+	//@Valid, BindingResult necesarios para validar los campos
+	public String guardar(@Valid Persona cliente, BindingResult result, Model model, SessionStatus status) {
+	personaservice.save(cliente);
 		status.setComplete();
-		logger.info("Se ha añadido el registro correctamente");
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/Detalle/{id}")  // En la vista tiene que que llevar 
+	public String Detalle(@PathVariable(value="id") Long id, Map<String,Object> model) {
+		Persona persona = null;
+	
+		if(id>0) {
+			persona = personaservice.findOne(id);
+		}else {
+			return "redirect:/Index";
+		}
+		model.put("persona", persona);
+		model.put("titulo", "Detalle");
+		return "DetallePersona";
 	}
 
 	/**
