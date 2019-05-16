@@ -1,70 +1,67 @@
 package com.grupo01.proyecto.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
- * 1 * Nombre: Provincia 2 * Descripcion: Clase con setter/getter, constructor
- * (default) y toString 3 * Fecha: 14.05.2019 4 * @version 1.0 5 * @author Sagui
- * Shahnavaz
+ * The persistent class for the provincia database table.
+ * 
  */
-
 @Entity
-@Table(name = "provincia")
+@NamedQuery(name="Provincia.findAll", query="SELECT p FROM Provincia p")
 public class Provincia implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idprovincia")
-	private Long id;
+	private int idprovincia;
 
-	@OneToOne(mappedBy = "provincia")
-	Direccion direccion;
-	
 	private String provincia;
 
+	//bi-directional many-to-one association to Direccion
+	@OneToMany(mappedBy="provincia")
+	private List<Direccion> direccions;
+
 	public Provincia() {
-		super();
 	}
 
-	public Provincia(Long id, String provincia) {
-		super();
-		this.id = id;
-		this.provincia = provincia;
+	public int getIdprovincia() {
+		return this.idprovincia;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdprovincia(int idprovincia) {
+		this.idprovincia = idprovincia;
 	}
 
 	public String getProvincia() {
-		return provincia;
+		return this.provincia;
 	}
 
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Direccion> getDireccions() {
+		return this.direccions;
 	}
 
-	@Override
-	public String toString() {
-		return "Provincia [id=" + id + ", provincia=" + provincia + "]";
+	public void setDireccions(List<Direccion> direccions) {
+		this.direccions = direccions;
+	}
+
+	public Direccion addDireccion(Direccion direccion) {
+		getDireccions().add(direccion);
+		direccion.setProvincia(this);
+
+		return direccion;
+	}
+
+	public Direccion removeDireccion(Direccion direccion) {
+		getDireccions().remove(direccion);
+		direccion.setProvincia(null);
+
+		return direccion;
 	}
 
 }

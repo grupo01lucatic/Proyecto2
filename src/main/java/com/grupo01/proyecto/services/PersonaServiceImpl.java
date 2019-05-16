@@ -31,12 +31,13 @@ public class PersonaServiceImpl implements IPersonaService {
 	}
 
 	@Override
-	public Persona findOne(Long id) {
-		return contactocrud.findById(id).orElse(null);
+	public Persona findOne(Integer id) {
+		Persona persona = contactocrud.findById(id).orElse(null);
+		return persona;
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Integer id) {
 
 	}
 

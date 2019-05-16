@@ -1,5 +1,6 @@
 package com.grupo01.proyecto.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import com.grupo01.proyecto.model.Persona;
@@ -12,6 +13,6 @@ import com.grupo01.proyecto.model.Persona;
  * @author grupo01
  *
  */
-public interface ContactoCrud extends CrudRepository<Persona, Long> {
+public interface ContactoCrud extends JpaRepository<Persona, Integer> {
 
 }

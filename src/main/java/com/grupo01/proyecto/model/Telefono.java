@@ -1,81 +1,53 @@
 package com.grupo01.proyecto.model;
 
 import java.io.Serializable;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
-1  * Nombre: Telefono
-2  * Descripcion: Clase con setter/getter, constructor (default) y toString
-3  * Fecha: 14.05.2019
-4  * @version 1.0
-5  * @author Sagui Shahnavaz
-*/
-
+ * The persistent class for the telefono database table.
+ * 
+ */
 @Entity
-@Table(name="telefonos")
-public class Telefono implements Serializable{
-	
+@NamedQuery(name="Telefono.findAll", query="SELECT t FROM Telefono t")
+public class Telefono implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "idtelefono")
-	private Long id;
+	private int idtelefono;
+
 	private String telefono;
-		
-	private Long idpersona;
-	
-	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="idpersona", referencedColumnName="idpersona", insertable=false, updatable=false)
+
+	//bi-directional many-to-one association to Persona
+	@ManyToOne
+	@JoinColumn(name="idpersona")
 	private Persona persona;
 
-	public Persona getPersona() {
-		return persona;
+	public Telefono() {
 	}
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
+	public int getIdtelefono() {
+		return this.idtelefono;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdtelefono(int idtelefono) {
+		this.idtelefono = idtelefono;
 	}
 
 	public String getTelefono() {
-		return telefono;
+		return this.telefono;
 	}
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	public Long getIdpersona() {
-		return idpersona;
+	public Persona getPersona() {
+		return this.persona;
 	}
 
-	public void setIdpersona(Long idpersona) {
-		this.idpersona = idpersona;
-	}
-
-	
-	private static final long serialVersionUID = 1L;
-
-	@Override
-	public String toString() {
-		return "Telefono [idtelefono=" + id + ", telefono=" + telefono + ", idpersona=" + idpersona + "]";
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 }

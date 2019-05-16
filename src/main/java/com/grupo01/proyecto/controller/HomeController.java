@@ -94,10 +94,17 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/Detalle/{id}", method = RequestMethod.GET) // En la vista tiene que que llevar
-	public String Detalle(@PathVariable Long id, Model model) {
-		model.addAttribute("personas", personaservice.findOne(id));
-		// model.put("titulo", "Detalle");
+	@RequestMapping(value = "/Detalle/{id}") // En la vista tiene que que llevar
+	public String detalle(@PathVariable Integer id, Model model) {
+		Persona persona = personaservice.findOne(id);
+		if(persona != null) {
+			model.addAttribute("personas", persona);
+			model.addAttribute("telefonos", persona.getTelefonos());
+			model.addAttribute("direcciones", persona.getDireccions());
+			model.addAttribute("provincia", persona.getDireccions().get(0).getProvincia().getProvincia());
+		}else {
+			model.addAttribute("personas", new Persona());
+		}
 		return "detalle";
 	}
 
@@ -120,7 +127,7 @@ public class HomeController {
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String editarContacto(@PathVariable(value = "id") Long id, Model model) {
+	public String editarContacto(@PathVariable(value = "id") Integer id, Model model) {
 		Persona persona = null;
 		persona = personaservice.findOne(id);
 		model.addAttribute("detallepersona", persona);
@@ -150,7 +157,7 @@ public class HomeController {
 	 */
 
 	@PostMapping("/{id}/delete")
-	public String eliminarContacto(Model model, @PathVariable long id) {
+	public String eliminarContacto(Model model, @PathVariable Integer id) {
 		personaservice.delete(id);
 		logger.info("Se ha borrado el contacto");
 		return "redirect:/ListarContactos";

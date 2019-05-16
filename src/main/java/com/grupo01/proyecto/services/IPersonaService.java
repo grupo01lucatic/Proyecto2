@@ -7,7 +7,7 @@ public interface IPersonaService {
 
 	public void save(Persona persona);
 
-	public Persona findOne(Long id);
+	public Persona findOne(Integer id);
 
-	public void delete(Long id);
+	public void delete(Integer id);
 }
