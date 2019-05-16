@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Contactos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/estilosanti.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-light py-3">
+        <i class="far fa-address-card"></i>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Agenda</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+
+    <div class="py-3">
+        <div class="row justify-content-center py-3">
+            <div class="col-lg-8 text-center">
+                <h1>Listado de provincias</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <a th:href="@{/createuser}" class="btn btn-success"><i class="fa fa-plus"></i> Nueva provincia</a>
+        <table class="table table-striped table-bordered center bg-white">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="text-center">Nombre de provincia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="provincia: ${provincias}" class="bg-white">
+                    <td><a th:href="@{/DetalleProvincia/} + ${provincia.id}" th:text="${provincia.provincia}"></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body></html>

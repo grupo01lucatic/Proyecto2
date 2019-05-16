@@ -18,7 +18,6 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.services.IPersonaService;
-import com.santiago.ejercicioSpring.model.Producto;
 
 /**
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
