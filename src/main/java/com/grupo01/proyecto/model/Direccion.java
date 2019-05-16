@@ -1,9 +1,19 @@
 package com.grupo01.proyecto.model;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+
 
 /**
 1  * Nombre: Direccion
@@ -14,22 +24,35 @@ import javax.persistence.Id;
 */
 
 @Entity
-public class Direccion {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int iddireccion;
-	private String direccion;
-	private int codpostal;
-	private String localidad;
-	private int idprovincia;
-	private int idpersona;
+@Table(name = "direcciones")
+public class Direccion implements Serializable {
 
-	public int getIddireccion() {
-		return iddireccion;
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "iddireccion")
+	private Long id;
+	private String direccion;
+	private String codpostal;
+	private String localidad;
+	private Long idprovincia;
+	private Long idpersona;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idpersona", referencedColumnName = "idpersona", insertable = false, updatable = false)
+	private Persona persona;
+		
+	public Direccion() {}
+
+	
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setIddireccion(int iddireccion) {
-		this.iddireccion = iddireccion;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDireccion() {
@@ -40,11 +63,11 @@ public class Direccion {
 		this.direccion = direccion;
 	}
 
-	public int getCodpostal() {
+	public String getCodpostal() {
 		return codpostal;
 	}
 
-	public void setCodpostal(int codpostal) {
+	public void setCodpostal(String codpostal) {
 		this.codpostal = codpostal;
 	}
 
@@ -56,25 +79,36 @@ public class Direccion {
 		this.localidad = localidad;
 	}
 
-	public int getIdprovincia() {
+	public Long getIdprovincia() {
 		return idprovincia;
 	}
 
-	public void setIdprovincia(int idprovincia) {
+	public void setIdprovincia(Long idprovincia) {
 		this.idprovincia = idprovincia;
 	}
 
-	public int getIdpersona() {
+	public Long getIdpersona() {
 		return idpersona;
 	}
 
-	public void setIdpersona(int idpersona) {
+	public void setIdpersona(Long idpersona) {
 		this.idpersona = idpersona;
 	}
 
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+
+
+
 	@Override
 	public String toString() {
-		return "Direcciones [iddireccion=" + iddireccion + ", direccion=" + direccion + ", codpostal=" + codpostal
+		return "Direcciones [iddireccion=" + id + ", direccion=" + direccion + ", codpostal=" + codpostal
 				+ ", localidad=" + localidad + ", idprovincia=" + idprovincia + ", idpersona=" + idpersona + "]";
 	}
 
