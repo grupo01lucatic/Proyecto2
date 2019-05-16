@@ -51,6 +51,20 @@ public class HomeController {
 		logger.info("-- iniciada pagina de contacto nuevo");
 		return "redirect:/createuser";
 	}
+	
+	/**
+	1  * Descripcion: controller
+	2  * Fecha: 16.05.2019
+	3  * @version 1.0
+	4  * @author Grupo01
+	5  * @return Devuelve a la pagina listado de contactos
+	*/
+
+	@RequestMapping(value = "/iraListarContactos", method = RequestMethod.GET)
+	public String ListarContactos() {
+		logger.info("-- iniciada pagina de listado de contacto");
+		return "redirect:/ListarContactos";
+	}
 
 	/**@author Ivan Carpio
 	 * Fecha: 14.05.2019
