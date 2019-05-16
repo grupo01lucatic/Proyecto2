@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.services.IPersonaService;
+import com.grupo01.proyecto.services.PersonaServiceImpl;
 
 /**
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
@@ -31,7 +33,8 @@ import com.grupo01.proyecto.services.IPersonaService;
  */
 @Controller
 public class HomeController {
-	private IPersonaService personaservice;
+	@Autowired
+	private PersonaServiceImpl personaservice;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -41,7 +44,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 		logger.info("-- iniciada pagina de bienvenida");
-		return "createuser";
+		return "index";
 	}
 
 	/**
@@ -71,10 +74,9 @@ public class HomeController {
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "/createuser", method = RequestMethod.GET)
-	public String crear(Map<String, Object> model) {
-		Persona cliente = new Persona();
-		model.put("persona", cliente);
-		return "create";
+	public String crear(Model model) {
+		model.addAttribute("persona", new Persona());
+		return "createuser";
 	}
 
 	/**
@@ -92,18 +94,11 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/Detalle/{id}") // En la vista tiene que que llevar
-	public String Detalle(@PathVariable(value = "id") Long id, Map<String, Object> model) {
-		Persona persona = null;
-
-		if (id > 0) {
-			persona = personaservice.findOne(id);
-		} else {
-			return "redirect:/Index";
-		}
-		model.put("persona", persona);
-		model.put("titulo", "Detalle");
-		return "DetallePersona";
+	@RequestMapping(value = "/Detalle/{id}", method = RequestMethod.GET) // En la vista tiene que que llevar
+	public String Detalle(@PathVariable Long id, Model model) {
+		model.addAttribute("personas", personaservice.findOne(id));
+		// model.put("titulo", "Detalle");
+		return "detalle";
 	}
 
 	/**
@@ -142,21 +137,23 @@ public class HomeController {
 		logger.info("Contacto modificado");
 		return "redirect:/ListarContactos";
 	}
-	
+
 	/**
-	 * Metodo para eliminar un contacto al darle click en el boton que llama al metodo en servicio que usa el id del contacto para eliminarlo. 
+	 * Metodo para eliminar un contacto al darle click en el boton que llama al
+	 * metodo en servicio que usa el id del contacto para eliminarlo.
+	 * 
 	 * @author Jara Dominguez
 	 * @date 16.05.2019
 	 * @param model
 	 * @param id
 	 * @return Manda a la vista de listado de contactos
 	 */
-	
+
 	@PostMapping("/{id}/delete")
 	public String eliminarContacto(Model model, @PathVariable long id) {
 		personaservice.delete(id);
 		logger.info("Se ha borrado el contacto");
 		return "redirect:/ListarContactos";
 	}
-	
+
 }
