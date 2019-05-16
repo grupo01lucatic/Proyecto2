@@ -41,6 +41,27 @@ public class HomeController {
 	}
 
 	/**
+	 * 1 * Descripcion: controller 2 * Fecha: 16.05.2019 3 * @version 1.0 4
+	 * * @author Grupo01 5 * @return Devuelve a la pagina crear usuario nuevo
+	 */
+
+	@RequestMapping(value = "/iracreateuser", method = RequestMethod.GET)
+	public String createuser() {
+		logger.info("-- iniciada pagina de contacto nuevo");
+		return "redirect:/createuser";
+	}
+
+	/**
+	 * 1 * Descripcion: controller 2 * Fecha: 16.05.2019 3 * @version 1.0 4
+	 * * @author Grupo01 5 * @return Devuelve a la pagina listado de contactos
+	 */
+	@RequestMapping(value = "/iraListarContacto", method = RequestMethod.GET)
+	public String ListarContactos() {
+		logger.info("-- iniciada pagina de listado de contacto");
+		return "redirect:/ListarContactos";
+	}
+
+	/**
 	 * @author Ivan Carpio Fecha: 14.05.2019 GET Recibe un objeto de tipo Persona y
 	 *         lo añade al Map del modelo Persona
 	 * @version 1.0
@@ -84,5 +105,18 @@ public class HomeController {
 		model.addAttribute("personas", personaservice.findAll());
 		logger.info("Se han mostrado los contactos");
 		return "ListarContactos";
+	}
+
+	/**
+	 * @author Santiago Villar Calvo 16.05.2019 Llama a un metodo en servicios que
+	 *         tiene una lista de contacto y muestra la lista en el html
+	 *         DetalleContactos
+	 * @version 1.0
+	 */
+	@GetMapping("/DetalleContactos")
+	public String detalleDeContacto(Model model) {
+		model.addAttribute("personas", personaservice.findAll());
+		logger.info("Se han listado los contactos");
+		return "DetalleContactos";
 	}
 }
