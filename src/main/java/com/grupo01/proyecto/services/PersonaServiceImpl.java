@@ -1,11 +1,12 @@
 package com.grupo01.proyecto.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.dao.ContactoCrud;
-
+@Repository
 public class PersonaServiceImpl implements IPersonaService {
 	@Autowired
 	private ContactoCrud contactocrud;
