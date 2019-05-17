@@ -21,7 +21,7 @@
 		<div class="container">
 		    <h1>Crear un contacto nuevo</h1>
 			
-			<form th:action="@{/createuser}" th:object="${persona}"
+			<form th:action="@{/createContacto}" th:object="${persona}"
 				method="post">
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -104,7 +104,7 @@
                         </select>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary" th:text="${persona.id} ? 'Editar': 'Crear'">Crear</button>
+				<button type="submit" class="btn btn-primary" th:text="${persona.idpersona} ? 'Editar': 'Crear'">Crear</button>
 			</form>
 		</div>
 	</main>

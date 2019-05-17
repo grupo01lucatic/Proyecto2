@@ -9,8 +9,8 @@ public interface IProvinciaService {
 	
 	public void save(Provincia provincia);
 	
-	public Provincia findOne(Long id);
+	public Provincia findOne(int id);
 	
-	public void delete(Long id);
+	public void delete(int id);
 	
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title >Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+</head>
+<body>
+<body>
+	<div class="container">
+		<h1 class="text-secondary border-top-0 border-left-0 border-right-0">
+			Agenda</h1>
+		<h1 th:text="${titulo}"
+			class="text-secondary border-top-0 border-left-0 border-right-0"></h1>
+
+		<tr th:each="provincia: ${provincias}">
+		<br>
+		<h1 style="color: blue">Id:</h1>
+		<h2 th:text="${provincia.idprovincia}"></h2>
+		<br>
+		<h1 style="color: blue">Nombre:</h1>
+		<h2 th:text="${provincia.provincia}"></h2>
+		<br>
+		</tr>
+	</div>
+</body>
+</html>

@@ -66,9 +66,19 @@ public class HomeController {
 	 * * @author Grupo01 5 * @return Devuelve a la pagina listado de contactos
 	 */
 	@RequestMapping(value = "/iraListarContacto", method = RequestMethod.GET)
-	public String ListarContactos() {
+	public String listarContactos() {
 		logger.info("-- iniciada pagina de listado de contacto");
 		return "redirect:/ListarContactos";
+	}
+
+	/**
+	 * 1 * Descripcion: controller 2 * Fecha: 16.05.2019 3 * @version 1.0 4
+	 * * @author Grupo01 5 * @return Devuelve a la pagina listado de contactos
+	 */
+	@RequestMapping(value = "/iraListarProvincia", method = RequestMethod.GET)
+	public String listarProvincias() {
+		logger.info("-- iniciada pagina de listado de provincia");
+		return "redirect:/ListarProvincias";
 	}
 
 	/**
@@ -76,10 +86,10 @@ public class HomeController {
 	 *         lo añade al Map del modelo Persona
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "/createuser", method = RequestMethod.GET)
+	@RequestMapping(value = "/createContacto", method = RequestMethod.GET)
 	public String crear(Model model) {
 		model.addAttribute("persona", new Persona());
-		return "createuser";
+		return "CrearContacto";
 	}
 
 	/**
@@ -195,6 +205,12 @@ public class HomeController {
 		return "redirect:/AltaProvincias";
 	}
 
+	@RequestMapping(value = "/createProvincia", method = RequestMethod.GET)
+	public String crearProvincia(Model model) {
+		model.addAttribute("provincia", new Provincia());
+		return "CrearProvincia";
+	}
+
 	/**
 	 * Guarda la provincia introducida por el usuario en el formulario
 	 * 
@@ -202,12 +218,25 @@ public class HomeController {
 	 * @date 16.05.2019
 	 * @return Redirecciona a la pagina que muestra el listado de provincias
 	 */
-	@PostMapping("createProvinciaPost")
+	@PostMapping("/createProvincia")
 	public String guardarProvincia(@Valid Provincia provincia, BindingResult result, Model model,
 			SessionStatus status) {
 		provinciaservice.save(provincia);
 		status.setComplete();
 		logger.info("Se ha creado la provincia");
 		return "redirect:/ListarProvincias";
+	}
+
+	@RequestMapping(value = "/DetalleProvincia/{id}") // En la vista tiene que que llevar
+	public String detalleProvincia(@PathVariable(value = "id") int id, Map<String, Object> model) {
+		Provincia provincia = null;
+
+		if (id > 0) {
+			provincia = provinciaservice.findOne(id);
+		} else {
+			return "redirect:/Index";
+		}
+		model.put("provincias", provincia);
+		return "DetalleProvincia";
 	}
 }
