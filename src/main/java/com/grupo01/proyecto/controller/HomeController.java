@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
+import com.grupo01.proyecto.services.IPersonaServices;
 import com.grupo01.proyecto.model.Provincia;
 import com.grupo01.proyecto.services.IPersonaService;
 import com.grupo01.proyecto.services.IProvinciaService;
@@ -38,7 +39,7 @@ public class HomeController {
 	private IPersonaService personaservice;
 	private IProvinciaService provinciaservice;
 	@Autowired
-	private PersonaServiceImpl personaservice;
+	private IPersonaServices personaservice;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -98,11 +99,17 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/Detalle/{id}", method = RequestMethod.GET) // En la vista tiene que que llevar
-	public String Detalle(@PathVariable Long id, Model model) {
-		model.addAttribute("personas", personaservice.findOne(id));
-		// model.put("titulo", "Detalle");
-		return "detalle";
+	@RequestMapping(value="/Detalle/{id}")  // En la vista tiene que que llevar 
+	public String Detalle(@PathVariable(value="id") int id, Map<String,Object> model) {
+		Persona persona = null;
+	
+		if(id>0) {
+			persona = personaservice.findOne(id);
+		}else {
+			return "redirect:/Index";
+		}
+		model.put("persona", persona);
+		return "DetalleContacto";
 	}
 
 	/**
@@ -124,7 +131,7 @@ public class HomeController {
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String editarContacto(@PathVariable(value = "id") Long id, Model model) {
+	public String editarContacto(@PathVariable(value = "id") Integer id, Model model) {
 		Persona persona = null;
 		persona = personaservice.findOne(id);
 		model.addAttribute("detallepersona", persona);
@@ -154,7 +161,7 @@ public class HomeController {
 	 */
 
 	@PostMapping("/{id}/delete")
-	public String eliminarContacto(Model model, @PathVariable long id) {
+	public String eliminarContacto(Model model, @PathVariable Integer id) {
 		personaservice.delete(id);
 		logger.info("Se ha borrado el contacto");
 		return "redirect:/ListarContactos";
@@ -170,12 +177,12 @@ public class HomeController {
 	 * @return Manda a la vista de listado de provincias
 	 */
 
-	@GetMapping("/ListarProvincias")
+	/*@GetMapping("/ListarProvincias")
 	public String listarProvincias(Model model) {
 		model.addAttribute("provincias", provinciaservice.findAll());
 		logger.info("Se han listado las provincias");
 		return "ListarProvincias";
-	}
+	}*/
 	
 	/**
 	 * Metodo para mostrar la vista de alta provincia

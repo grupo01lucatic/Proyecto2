@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.grupo01.proyecto.services.PersonaServiceImpl;
+import com.grupo01.proyecto.services.PersonaServicesImplr;
 
 /**
  * Clase ListaExiste. Esta clase es la que se encarga de realizar las pruebas
@@ -25,7 +25,7 @@ import com.grupo01.proyecto.services.PersonaServiceImpl;
 public class ListaContactos {
 
 	@Autowired
-	private PersonaServiceImpl listaContactos;
+	private PersonaServicesImplr listaContactos;
 
 	/**
 	 * @autor: Jara Dominguez
