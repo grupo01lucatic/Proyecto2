@@ -1,5 +1,6 @@
 package com.grupo01.proyecto.model;
 
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
@@ -30,11 +31,11 @@ public class Persona implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Direccion
-	@OneToMany(targetEntity = Direccion.class, mappedBy = "persona", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="persona")
 	private List<Direccion> direccions;
 
 	//bi-directional many-to-one association to Telefono
-	@OneToMany(targetEntity = Telefono.class, mappedBy = "persona", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="persona")
 	private List<Telefono> telefonos;
 
 	public Persona() {

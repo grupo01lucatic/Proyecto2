@@ -1,5 +1,6 @@
 package com.grupo01.proyecto.model;
 
+
 import java.io.Serializable;
 import javax.persistence.*;
 

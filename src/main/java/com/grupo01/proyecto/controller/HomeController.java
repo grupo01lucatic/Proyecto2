@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
-import com.grupo01.proyecto.services.IPersonaService;
-import com.grupo01.proyecto.services.PersonaServiceImpl;
+import com.grupo01.proyecto.services.IPersonaServices;
 
 /**
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
@@ -34,7 +33,7 @@ import com.grupo01.proyecto.services.PersonaServiceImpl;
 @Controller
 public class HomeController {
 	@Autowired
-	private PersonaServiceImpl personaservice;
+	private IPersonaServices personaservice;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -94,18 +93,17 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/Detalle/{id}") // En la vista tiene que que llevar
-	public String detalle(@PathVariable Integer id, Model model) {
-		Persona persona = personaservice.findOne(id);
-		if(persona != null) {
-			model.addAttribute("personas", persona);
-			model.addAttribute("telefonos", persona.getTelefonos());
-			model.addAttribute("direcciones", persona.getDireccions());
-			model.addAttribute("provincia", persona.getDireccions().get(0).getProvincia().getProvincia());
+	@RequestMapping(value="/Detalle/{id}")  // En la vista tiene que que llevar 
+	public String Detalle(@PathVariable(value="id") int id, Map<String,Object> model) {
+		Persona persona = null;
+	
+		if(id>0) {
+			persona = personaservice.findOne(id);
 		}else {
-			model.addAttribute("personas", new Persona());
+			return "redirect:/Index";
 		}
-		return "detalle";
+		model.put("persona", persona);
+		return "DetalleContacto";
 	}
 
 	/**
@@ -173,10 +171,10 @@ public class HomeController {
 	 * @return Manda a la vista de listado de provincias
 	 */
 
-	@GetMapping("/ListarProvincias")
+	/*@GetMapping("/ListarProvincias")
 	public String listarProvincias(Model model) {
 		model.addAttribute("provincias", provinciaservice.findAll());
 		logger.info("Se han listado las provincias");
 		return "ListarProvincias";
-	}
+	}*/
 }

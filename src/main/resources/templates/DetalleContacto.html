@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${persona.nombre}">Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+</head>
+<body>
+<body>
+	<div class="container">
+		<h1 class="text-secondary border-top-0 border-left-0 border-right-0">
+			Agenda</h1>
+		<h1 th:text="${titulo}"
+			class="text-secondary border-top-0 border-left-0 border-right-0"></h1>
+
+		<p th:each="persona: ${personas}"></p>
+		<br>
+		<h1 style="color: blue">Nombre:</h1>
+		<h2 th:text="${persona.nombre}"></h2>
+		<br>
+		<h1 style="color: blue">Apellidos:</h1>
+		<h2 th:text="${persona.apellido1}"></h2>
+		<h2 th:text="${persona.apellido2}"></h2>
+		<br>
+		<h1 style="color: blue">Fecha de Nacimiento:</h1>
+		<h2 th:text="${persona.fechanacimiento}"></h2>
+	</div>
+	<div class="container">
+		<table class="table table-striped table-bordered">
+			<thead class="thead-inverse">
+				<tr>
+					<th>Telefonos</th>			
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="telefono: ${persona.telefonos}">					
+					<td th:text="${telefono.telefono}"></td>								
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="container">
+		<table class="table table-striped table-bordered">
+			<thead class="thead-inverse">
+				<tr>
+					<th>Direcciones</th>			
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="direccion: ${persona.direccions}">					
+					<td th:text="${direccion.direccion}"></td>
+					<td th:text="${direccion.codpostal}"></td>	
+					<td th:text="${direccion.localidad}"></td>
+					<td th:text="${direccion.provincia.provincia}"></td>									
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+</body>
+</html>
