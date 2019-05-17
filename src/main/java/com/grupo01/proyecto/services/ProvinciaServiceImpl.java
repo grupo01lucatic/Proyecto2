@@ -36,7 +36,7 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 	
 	@Override
 	public void save(Provincia provincia) {
-		provinciacrud.save(provincia);
+		provinciacrud.saveAndFlush(provincia);
 		
 	}
 

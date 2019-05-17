@@ -1,6 +1,8 @@
 package com.grupo01.proyecto.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.grupo01.proyecto.model.Provincia;
 
@@ -12,7 +14,8 @@ import com.grupo01.proyecto.model.Provincia;
  * @author grupo01
  *
  */
-
-public interface ProvinciaCrud extends CrudRepository<Provincia, Integer> {
+@Transactional  
+@Repository 
+public interface ProvinciaCrud extends JpaRepository<Provincia, Integer> {
 
 }
