@@ -41,15 +41,15 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 	}
 
 	@Override
-	public Provincia findOne(Long id) {
+	public Provincia findOne(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return provinciacrud.findById(id).orElse(null);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(int id) {
 		// TODO Auto-generated method stub
-		
+		provinciacrud.deleteById(id);
 	}
 	
 }

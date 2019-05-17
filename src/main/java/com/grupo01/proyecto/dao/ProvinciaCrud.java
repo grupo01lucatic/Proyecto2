@@ -13,6 +13,6 @@ import com.grupo01.proyecto.model.Provincia;
  *
  */
 
-public interface ProvinciaCrud extends CrudRepository<Provincia, Long> {
+public interface ProvinciaCrud extends CrudRepository<Provincia, Integer> {
 
 }
