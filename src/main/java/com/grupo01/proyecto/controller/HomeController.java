@@ -23,9 +23,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.services.IPersonaServices;
 import com.grupo01.proyecto.model.Provincia;
-import com.grupo01.proyecto.services.IPersonaService;
 import com.grupo01.proyecto.services.IProvinciaService;
-import com.grupo01.proyecto.services.PersonaServiceImpl;
 
 /**
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
@@ -36,7 +34,7 @@ import com.grupo01.proyecto.services.PersonaServiceImpl;
  */
 @Controller
 public class HomeController {
-	private IPersonaService personaservice;
+	@Autowired
 	private IProvinciaService provinciaservice;
 	@Autowired
 	private IPersonaServices personaservice;
@@ -99,13 +97,13 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value="/Detalle/{id}")  // En la vista tiene que que llevar 
-	public String Detalle(@PathVariable(value="id") int id, Map<String,Object> model) {
+	@RequestMapping(value = "/Detalle/{id}") // En la vista tiene que que llevar
+	public String Detalle(@PathVariable(value = "id") int id, Map<String, Object> model) {
 		Persona persona = null;
-	
-		if(id>0) {
+
+		if (id > 0) {
 			persona = personaservice.findOne(id);
-		}else {
+		} else {
 			return "redirect:/Index";
 		}
 		model.put("persona", persona);
@@ -177,36 +175,36 @@ public class HomeController {
 	 * @return Manda a la vista de listado de provincias
 	 */
 
-	/*@GetMapping("/ListarProvincias")
+	@GetMapping("/ListarProvincias")
 	public String listarProvincias(Model model) {
 		model.addAttribute("provincias", provinciaservice.findAll());
 		logger.info("Se han listado las provincias");
 		return "ListarProvincias";
-	}*/
-	
+	}
+
 	/**
 	 * Metodo para mostrar la vista de alta provincia
+	 * 
 	 * @author Jara Dominguez
 	 * @date 16.05.2019
 	 * @return Manda a la vista de alta provincia
 	 */
-	
 	@GetMapping("/irAltaProvincias")
 	public String createProvincia() {
 		logger.info("--Iniciada pagina para provincia nueva");
 		return "redirect:/AltaProvincias";
 	}
-	
+
 	/**
 	 * Guarda la provincia introducida por el usuario en el formulario
+	 * 
 	 * @author Jara Dominguez
 	 * @date 16.05.2019
 	 * @return Redirecciona a la pagina que muestra el listado de provincias
 	 */
-	
-	
 	@PostMapping("createProvinciaPost")
-	public String guardarProvincia(@Valid Provincia provincia, BindingResult result, Model model, SessionStatus status) {
+	public String guardarProvincia(@Valid Provincia provincia, BindingResult result, Model model,
+			SessionStatus status) {
 		provinciaservice.save(provincia);
 		status.setComplete();
 		logger.info("Se ha creado la provincia");
