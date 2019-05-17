@@ -1,9 +1,11 @@
 package com.grupo01.proyecto.services;
 
+import java.util.List;
+
 import com.grupo01.proyecto.model.Provincia;
 
 public interface IProvinciaService {
-	public Iterable<Provincia> findAll();
+	public List<Provincia> findAll();
 	
 	public void save(Provincia provincia);
 	

@@ -41,7 +41,7 @@
             </thead>
             <tbody>
                 <tr th:each="provincia: ${provincias}" class="bg-white">
-                    <td><a th:href="@{/DetalleProvincia/} + ${provincia.id}" th:text="${provincia.provincia}"></a></td>
+                    <td><a th:href="@{/DetalleProvincia/} + ${provincia.idprovincia}" th:text="${provincia.provincia}"></a></td>
                 </tr>
             </tbody>
         </table>
