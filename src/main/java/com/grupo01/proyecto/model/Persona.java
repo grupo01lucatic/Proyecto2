@@ -3,6 +3,9 @@ package com.grupo01.proyecto.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class Persona implements Serializable {
 	private String dni;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private Date fechanacimiento;
 
 	private String nombre;

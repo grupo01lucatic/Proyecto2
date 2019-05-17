@@ -23,6 +23,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.services.IPersonaServices;
 import com.grupo01.proyecto.model.Provincia;
+import com.grupo01.proyecto.model.Telefono;
 import com.grupo01.proyecto.services.IProvinciaService;
 
 /**
@@ -58,7 +59,7 @@ public class HomeController {
 	@RequestMapping(value = "/iracreateuser", method = RequestMethod.GET)
 	public String createuser() {
 		logger.info("-- iniciada pagina de contacto nuevo");
-		return "redirect:/createuser";
+		return "redirect:/createContacto";
 	}
 
 	/**
@@ -89,6 +90,7 @@ public class HomeController {
 	@RequestMapping(value = "/createContacto", method = RequestMethod.GET)
 	public String crear(Model model) {
 		model.addAttribute("persona", new Persona());
+		model.addAttribute("telefono", new Telefono());
 		return "CrearContacto";
 	}
 
@@ -99,9 +101,9 @@ public class HomeController {
 	 *         raiz.
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
+	@RequestMapping(value = "/createContacto", method = RequestMethod.POST)
 	// @Valid, BindingResult necesarios para validar los campos
-	public String guardar(@Valid Persona cliente, BindingResult result, Model model, SessionStatus status) {
+	public String guardar(@ModelAttribute Persona cliente, BindingResult result, Model model, SessionStatus status) {
 		personaservice.save(cliente);
 		status.setComplete();
 		return "redirect:/";
