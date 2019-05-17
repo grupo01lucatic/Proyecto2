@@ -1,9 +1,12 @@
 package com.grupo01.proyecto.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.grupo01.proyecto.dao.ProvinciaCrud;
+import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.model.Provincia;
 
 /**
@@ -18,9 +21,9 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 	private ProvinciaCrud provinciacrud;
 	
 	@Override
-	public Iterable<Provincia> findAll() {
+	public List<Provincia> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<Provincia>) provinciacrud.findAll();
 	}
 	/**
 	 * @author Jara Dominguez
