@@ -140,20 +140,21 @@ public class HomeController {
 	 *         muestra sus datos
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editarContacto(@PathVariable(value = "id") Integer id, Model model) {
 		Persona persona = null;
 		persona = personaservice.findOne(id);
-		model.addAttribute("detallepersona", persona);
-		return "ListarContactos";
+		model.addAttribute("persona", persona);
+		return "EditarContacto";
 	}
 
 	/**
 	 * @author Santiago Villar Calvo: 16.05.2019 Sobreescribe el usuario en la DB.
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public String editarContacto(@ModelAttribute Persona persona) {
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+	public String editarContacto(@ModelAttribute Persona persona, @PathVariable int id) {
+		personaservice.delete(id);
 		personaservice.save(persona);
 		logger.info("Contacto modificado");
 		return "redirect:/ListarContactos";
@@ -170,8 +171,8 @@ public class HomeController {
 	 * @return Manda a la vista de listado de contactos
 	 */
 
-	@PostMapping("/{id}/delete")
-	public String eliminarContacto(Model model, @PathVariable Integer id) {
+	@GetMapping("/delete/{id}")
+	public String eliminarContacto(@PathVariable Integer id) {
 		personaservice.delete(id);
 		logger.info("Se ha borrado el contacto");
 		return "redirect:/ListarContactos";
