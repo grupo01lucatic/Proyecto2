@@ -108,6 +108,12 @@ public class HomeController {
 		status.setComplete();
 		return "redirect:/";
 	}
+	/**
+	 * @author Ivan Carpio Fecha: 14.05.2019 Muestra todos los datos asociados al contacto,
+	 * que coincida con la id y los inyecta en la vista /Detalle/id ,el titulo de la pagina
+	 * y el nombre del contacto en la pestaña. 
+	 * @version 1.0
+	 */
 
 	@RequestMapping(value = "/Detalle/{id}") // En la vista tiene que que llevar
 	public String Detalle(@PathVariable(value = "id") int id, Map<String, Object> model) {
@@ -117,8 +123,12 @@ public class HomeController {
 			persona = personaservice.findOne(id);
 		} else {
 			return "redirect:/Index";
+			return "redirect:/";
 		}
 		model.put("persona", persona);
+		model.put("titulo", "Detalles del Contacto");
+		
+		
 		return "DetalleContacto";
 	}
 
