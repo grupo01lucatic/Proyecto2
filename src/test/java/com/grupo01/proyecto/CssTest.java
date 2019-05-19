@@ -13,13 +13,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
-1  * Nombre: EstilosCss
-2  * Descripcion: Este metodo fallaria si no existiera la hoja de estilos.
-3  * Fecha: 16.05.2019
-4  * @version 1.0
-5  * @author Sagui Shahnavaz- Grupo01
-6  * @throws Exception
-*/
+ * 1 * Nombre: EstilosCss 2 * Descripcion: Este metodo fallaria si no existiera
+ * la hoja de estilos. 3 * Fecha: 16.05.2019 4 * @version 1.0 5 * @author Sagui
+ * Shahnavaz- Grupo01 6 * @throws Exception
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

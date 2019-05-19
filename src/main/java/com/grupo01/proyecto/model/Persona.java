@@ -1,21 +1,25 @@
 package com.grupo01.proyecto.model;
 
-
 import java.io.Serializable;
-import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the persona database table.
  * 
  */
 @Entity
-@NamedQuery(name="Persona.findAll", query="SELECT p FROM Persona p")
+@NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
 public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,17 +33,17 @@ public class Persona implements Serializable {
 	private String dni;
 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechanacimiento;
 
 	private String nombre;
 
-	//bi-directional many-to-one association to Direccion
-	@OneToMany(mappedBy="persona")
+	// bi-directional many-to-one association to Direccion
+	@OneToMany(mappedBy = "persona")
 	private List<Direccion> direccions;
 
-	//bi-directional many-to-one association to Telefono
-	@OneToMany(mappedBy="persona")
+	// bi-directional many-to-one association to Telefono
+	@OneToMany(mappedBy = "persona")
 	private List<Telefono> telefonos;
 
 	public Persona() {

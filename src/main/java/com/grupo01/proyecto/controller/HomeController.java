@@ -1,7 +1,6 @@
 package com.grupo01.proyecto.controller;
 
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,7 @@ import com.grupo01.proyecto.services.IProvinciaService;
  * Clase HomeController. Esta clase es la controladora de la vista. 14/05/2019
  * 
  * @version 1.0
- * @author grupo01
+ * @author Santiago Villar
  *
  */
 @Controller
@@ -53,7 +51,7 @@ public class HomeController {
 
 	/**
 	 * 1 * Descripcion: controller 2 * Fecha: 16.05.2019 3 * @version 1.0 4
-	 * * @author Grupo01 5 * @return Devuelve a la pagina crear usuario nuevo
+	 * * @author Santiago Villar * @return Devuelve a la pagina crear usuario nuevo
 	 */
 
 	@RequestMapping(value = "/iracreateuser", method = RequestMethod.GET)
@@ -64,7 +62,7 @@ public class HomeController {
 
 	/**
 	 * 1 * Descripcion: controller 2 * Fecha: 16.05.2019 3 * @version 1.0 4
-	 * * @author Grupo01 5 * @return Devuelve a la pagina listado de contactos
+	 * * @author Santiago Villar * @return Devuelve a la pagina listado de contactos
 	 */
 	@RequestMapping(value = "/iraListarContacto", method = RequestMethod.GET)
 	public String listarContactos() {
@@ -91,6 +89,7 @@ public class HomeController {
 	public String crear(Model model) {
 		model.addAttribute("persona", new Persona());
 		model.addAttribute("telefono", new Telefono());
+		logger.info("-- iniciada pagina de crear contacto");
 		return "CrearContacto";
 	}
 
@@ -106,12 +105,15 @@ public class HomeController {
 	public String guardar(@ModelAttribute Persona cliente, BindingResult result, Model model, SessionStatus status) {
 		personaservice.save(cliente);
 		status.setComplete();
+		logger.info("-- creado contacto");
 		return "redirect:/";
 	}
+
 	/**
-	 * @author Ivan Carpio Fecha: 14.05.2019 Muestra todos los datos asociados al contacto,
-	 * que coincida con la id y los inyecta en la vista /Detalle/id ,el titulo de la pagina
-	 * y el nombre del contacto en la pestaña. 
+	 * @author Ivan Carpio Fecha: 14.05.2019 Muestra todos los datos asociados al
+	 *         contacto, que coincida con la id y los inyecta en la vista
+	 *         /Detalle/id ,el titulo de la pagina y el nombre del contacto en la
+	 *         pestaña.
 	 * @version 1.0
 	 */
 
@@ -122,13 +124,12 @@ public class HomeController {
 		if (id > 0) {
 			persona = personaservice.findOne(id);
 		} else {
-			return "redirect:/Index";
 			return "redirect:/";
 		}
 		model.put("persona", persona);
 		model.put("titulo", "Detalles del Contacto");
-		
-		
+		logger.info("-- iniciada pagina de detalle de contacto");
+
 		return "DetalleContacto";
 	}
 
@@ -155,6 +156,7 @@ public class HomeController {
 		Persona persona = null;
 		persona = personaservice.findOne(id);
 		model.addAttribute("persona", persona);
+		logger.info("-- iniciada pagina de editar contacto");
 		return "EditarContacto";
 	}
 
@@ -218,6 +220,14 @@ public class HomeController {
 		return "redirect:/AltaProvincias";
 	}
 
+	/**
+	 * Carga el formulario en la pagina
+	 * 
+	 * @author Santiago Villar
+	 * @date 16.05.2019
+	 * @return Devuelve la pagina del formulario para crear provincias
+	 */
+
 	@RequestMapping(value = "/createProvincia", method = RequestMethod.GET)
 	public String crearProvincia(Model model) {
 		model.addAttribute("provincia", new Provincia());
@@ -240,7 +250,14 @@ public class HomeController {
 		return "redirect:/ListarProvincias";
 	}
 
-	@RequestMapping(value = "/DetalleProvincia/{id}") // En la vista tiene que que llevar
+	/**
+	 * Muestra los detalles de una provincia
+	 * 
+	 * @author Ivan Carpio
+	 * @date 16.05.2019
+	 * @return Redirecciona a la pagina que muestra el detalle de provincias
+	 */
+	@RequestMapping(value = "/DetalleProvincia/{id}")
 	public String detalleProvincia(@PathVariable(value = "id") int id, Map<String, Object> model) {
 		Provincia provincia = null;
 

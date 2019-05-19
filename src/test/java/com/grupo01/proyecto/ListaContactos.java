@@ -1,8 +1,6 @@
 package com.grupo01.proyecto;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,8 +28,8 @@ public class ListaContactos {
 	/**
 	 * @autor: Jara Dominguez
 	 * @Date: 16/05/2019
-	 * @throws Exception
-	 * Este metodo falla si la listaContactos esta vacia. En caso contrario, funciona bien.
+	 * @throws Exception Este metodo falla si la listaContactos esta vacia. En caso
+	 *                   contrario, funciona bien.
 	 */
 	@Test
 	public void contextLoads() throws Exception {

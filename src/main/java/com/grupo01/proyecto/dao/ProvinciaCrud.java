@@ -7,15 +7,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.grupo01.proyecto.model.Provincia;
 
 /**
- * Clase ProvinciaCrud. Esta clase implementa la clase CrudRepository que se
+ * Clase ProvinciaCrud. Esta clase implementa la clase JpaRepository que se
  * encarga del CRUD. 16/05/2019
  * 
  * @version 1.0
- * @author grupo01
+ * @author Santiago Villar
  *
  */
-@Transactional  
-@Repository 
+@Transactional
+@Repository
 public interface ProvinciaCrud extends JpaRepository<Provincia, Integer> {
 
 }
