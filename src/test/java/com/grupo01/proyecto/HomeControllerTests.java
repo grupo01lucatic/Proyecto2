@@ -15,7 +15,7 @@ import com.grupo01.proyecto.controller.HomeController;
  * pruebas unitarias al HomeController. 14/05/2019
  * 
  * @version 1.0
- * @author grupo01
+ * @author Santiago Villar
  *
  */
 @RunWith(SpringRunner.class)

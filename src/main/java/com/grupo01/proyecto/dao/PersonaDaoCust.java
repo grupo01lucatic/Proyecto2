@@ -4,17 +4,30 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.grupo01.proyecto.model.Persona;
 
+/**
+ * @author Santiago Villar
+ * @date 16.05.2019
+ * @param Provincia
+ * @return void Clase con querys personalizadas para la gestion de los
+ *         contactos.
+ */
 @Repository
 public class PersonaDaoCust implements IPersonaDaoCust {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * @author Santiago Villar
+	 * @date 16.05.2019
+	 * @param Persona
+	 * @return void Metodo que recibe un objeto tipo Persona y lo guarda en la base
+	 *         de datos.
+	 */
 	@Override
 	public void darDeAltaContacto(Persona persona) {
 		// TODO Auto-generated method stub

@@ -48,59 +48,73 @@
 						<label for="inputTelefono">Telefono</label>
 						<input type="text" class="form-control" id="inputTelefono" placeholder="Telefono" th:field="*{telefonos[0].telefono}">
 					</div>
+					
 					<div class="form-group col-md-6">
-					    <select class="form-control">
-                              <option>Seleccione provincia</option>
-                              <option>Álava (Araba)(País Vasco,ES)</option>
-                              <option>Albacete (Castilla-La Mancha,ES)</option>
-                              <option>Alicante (Comunidad Valenciana,ES)</option>
-                              <option>Almería (Andalucía,ES)</option>
-                              <option>Asturias (Principado de Asturias,ES)</option>
-                              <option>Ávila (Castilla y León,ES)</option>
-                              <option>Badajoz (Extremadura,ES)</option>
-                              <option>Barcelona (Cataluña,ES)</option>
-                              <option>Burgos (Castilla y León,ES)</option>
-                              <option>Cáceres (Extremadura,ES)</option>
-                              <option>Cádiz (Andalucía,ES)</option>
-                              <option>Cantabria (Cantabria,ES)</option>
-                              <option>Castellón (Comunidad Valenciana,ES)</option>
-                              <option>Ciudad Real (Castilla-La Mancha,ES)</option>
-                              <option>Córdoba (Andalucía,ES)</option>
-                              <option>Cuenca (Castilla-La Mancha,ES)</option>
-                              <option>Córdoba (Andalucía,ES)</option>
-                              <option>Gerona (Girona) (Cataluña,ES)</option>
-                              <option>Granada (Andalucía,ES)</option>
-                              <option>Guadalajara (Castilla-La Mancha,ES)</option>
-                              <option>Guipúzcoa (Gipuzkoa) (País Vasco,ES)</option>
-                              <option>Huelva (Andalucía,ES)</option>
-                              <option>Huesca (Aragon,ES)</option>
-                              <option>Islas Baleares (Islas Baleares,ES)</option>
-                              <option>Jaén (Andalucía,ES)</option>
-                              <option>La Coruña (A Coruña) (Galicia,ES)</option>
-                              <option>La Rioja (La Rioja,ES)</option>
-                              <option>Las Palmas (Canarias,ES)</option>
-                              <option>León (Castilla y León,ES)</option>
-                              <option>Lérida (Lleida) (Cataluña,ES)</option>
-                              <option>Madrid (Comunidad de Madrid,ES)</option>
-                              <option>Málaga (Andalucía,ES)</option>
-                              <option>Murcia (Región de Murcia,ES)</option>
-                              <option>Navarra (Comunidad Foral de Navarra,ES)</option>
-                              <option>Orense (Ourense) (Galicia,ES)</option>
-                              <option>Palencia (Castilla y León,ES)</option>
-                              <option>Pontevedra (Galicia,ES)</option>
-                              <option>Salamanca (Castilla y León,ES)</option>
-                              <option>Segovia (Castilla y León,ES)</option>
-                              <option>Sevilla (Andalucía,ES)</option>
-                              <option>Soria (Castilla y León,ES)</option>
-                              <option>Tarragona (Cataluña,ES)</option>
-                              <option>Tenerife (Canarias,ES)</option>
-                              <option>Teruel (Aragon,ES)</option>
-                              <option>Toledo (Castilla-La Mancha,ES)</option>
-                              <option>Valencia (Comunidad Valenciana,ES)</option>
-                              <option>Valladolid (Castilla y León,ES)</option>
-                              <option>Vizcaya (Bizkaia) (País Vasco,ES)</option>
-                              <option>Zamora (Castilla y León,ES)</option>
-                              <option>Zaragoza (Aragon,ES)</option>       
+						<label for="inputTelefono">Codigo postal</label>
+						<input type="text" class="form-control" id="inputCodPostal" placeholder="Codigo Postal" th:field="*{direccions[0].codpostal}">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputTelefono">Direccion</label>
+						<input type="text" class="form-control" id="inputDireccion" placeholder="Direccion" th:field="*{direccions[0].direccion}">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputTelefono">Localidad</label>
+						<input type="text" class="form-control" id="inputLocalidad" placeholder="Localidad" th:field="*{direccions[0].localidad}">
+					</div>
+					<div class="form-group col-md-6">
+                        <label for="inputTelefono">Provincia</label>
+					    <select class="form-control" th:field="*{direccions[0].provincia.provincia}">
+                              <option value="null">Seleccione provincia</option>
+                              <option value="null">Álava (Araba)(País Vasco,ES)</option>
+                              <option value="null">Albacete (Castilla-La Mancha,ES)</option>
+                              <option value="null">Alicante (Comunidad Valenciana,ES)</option>
+                              <option value="null">Almería (Andalucía,ES)</option>
+                              <option value="null">Asturias (Principado de Asturias,ES)</option>
+                              <option value="null">Ávila (Castilla y León,ES)</option>
+                              <option value="null">Badajoz (Extremadura,ES)</option>
+                              <option value="null">Barcelona (Cataluña,ES)</option>
+                              <option value="null">Burgos (Castilla y León,ES)</option>
+                              <option value="null">Cáceres (Extremadura,ES)</option>
+                              <option value="null">Cádiz (Andalucía,ES)</option>
+                              <option value="null">Cantabria (Cantabria,ES)</option>
+                              <option value="null">Castellón (Comunidad Valenciana,ES)</option>
+                              <option value="null">Ciudad Real (Castilla-La Mancha,ES)</option>
+                              <option value="null">Córdoba (Andalucía,ES)</option>
+                              <option value="null">Cuenca (Castilla-La Mancha,ES)</option>
+                              <option value="null">Córdoba (Andalucía,ES)</option>
+                              <option value="null">Gerona (Girona) (Cataluña,ES)</option>
+                              <option value="null">Granada (Andalucía,ES)</option>
+                              <option value="null">Guadalajara (Castilla-La Mancha,ES)</option>
+                              <option value="null">Guipúzcoa (Gipuzkoa) (País Vasco,ES)</option>
+                              <option value="null">Huelva (Andalucía,ES)</option>
+                              <option value="null">Huesca (Aragon,ES)</option>
+                              <option value="null">Islas Baleares (Islas Baleares,ES)</option>
+                              <option value="null">Jaén (Andalucía,ES)</option>
+                              <option value="null">La Coruña (A Coruña) (Galicia,ES)</option>
+                              <option value="null">La Rioja (La Rioja,ES)</option>
+                              <option value="null">Las Palmas (Canarias,ES)</option>
+                              <option value="null">León (Castilla y León,ES)</option>
+                              <option value="null">Lérida (Lleida) (Cataluña,ES)</option>
+                              <option value="null">Madrid (Comunidad de Madrid,ES)</option>
+                              <option value="null">Málaga (Andalucía,ES)</option>
+                              <option value="null">Murcia (Región de Murcia,ES)</option>
+                              <option value="null">Navarra (Comunidad Foral de Navarra,ES)</option>
+                              <option value="null">Orense (Ourense) (Galicia,ES)</option>
+                              <option value="null">Palencia (Castilla y León,ES)</option>
+                              <option value="null">Pontevedra (Galicia,ES)</option>
+                              <option value="null">Salamanca (Castilla y León,ES)</option>
+                              <option value="null">Segovia (Castilla y León,ES)</option>
+                              <option value="null">Sevilla (Andalucía,ES)</option>
+                              <option value="null">Soria (Castilla y León,ES)</option>
+                              <option value="null">Tarragona (Cataluña,ES)</option>
+                              <option value="null">Tenerife (Canarias,ES)</option>
+                              <option value="null">Teruel (Aragon,ES)</option>
+                              <option value="null">Toledo (Castilla-La Mancha,ES)</option>
+                              <option value="null">Valencia (Comunidad Valenciana,ES)</option>
+                              <option value="null">Valladolid (Castilla y León,ES)</option>
+                              <option value="null">Vizcaya (Bizkaia) (País Vasco,ES)</option>
+                              <option value="null">Zamora (Castilla y León,ES)</option>
+                              <option value="null">Zaragoza (Aragon,ES)</option>       
                         </select>
 					</div>
 				</div>
