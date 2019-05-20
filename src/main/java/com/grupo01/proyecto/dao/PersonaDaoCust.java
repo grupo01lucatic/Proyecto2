@@ -1,46 +1,92 @@
 package com.grupo01.proyecto.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import java.util.List;
+import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Component;
 
+import com.grupo01.proyecto.model.Direccion;
 import com.grupo01.proyecto.model.Persona;
+import com.grupo01.proyecto.model.Telefono;
 
-/**
- * @author Santiago Villar
- * @date 16.05.2019
- * @param Provincia
- * @return void Clase con querys personalizadas para la gestion de los
- *         contactos.
- */
-@Repository
-public class PersonaDaoCust implements IPersonaDaoCust {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+@Component
+public class PersonaDaoCust {
+	@Autowired
+	private PersonaRepository personaRepository;
+	
+	@Autowired
+	private TelefonoRepository telefonoRepository;
+	
+	@Autowired
+	private DireccionRepository direccionRepository;
 
-	/**
-	 * @author Santiago Villar
-	 * @date 16.05.2019
-	 * @param Persona
-	 * @return void Metodo que recibe un objeto tipo Persona y lo guarda en la base
-	 *         de datos.
-	 */
-	@Override
-	public void darDeAltaContacto(Persona persona) {
-		// TODO Auto-generated method stub
-		Query query = entityManager.createNativeQuery("INSERT INTO " + "persona"
-				+ " (persona.nombre, persona.apellido1, persona.apellido2, persona.dni, persona.fechanacimiento) "
-				+ "VALUES " + "(?, ?, ?, ?, ?)").setParameter(1, persona.getNombre())
-				.setParameter(2, persona.getApellido1()).setParameter(3, persona.getApellido2())
-				.setParameter(4, persona.getDni()).setParameter(5, persona.getFechanacimiento());
-		query.executeUpdate();
-		Query query2 = entityManager.createNativeQuery("INSERT INTO " + "telefono "
-				+ "(telefono.telefono, telefono.idpersona) " + "VALUES " + "(?, LAST_INSERT_ID())")
-				.setParameter(1, persona.getTelefonos().get(0).getTelefono());
-		query2.executeUpdate();
+	public Iterable<Persona> findAll() {
+		return personaRepository.findAll();
 	}
 
+	public boolean create(Persona persona) {		
+		Persona personaSaved = personaRepository.save(persona);
+		
+		List<Telefono> telefonos = persona.getTelefonos();
+		List<Direccion> direcciones = persona.getDireccions();
+		
+		for(int i = 0; i < telefonos.size(); i++) {
+			Telefono telefono = telefonos.get(i);
+			telefono.setPersona(personaSaved);
+			telefonoRepository.save(telefono);
+		}
+		
+		for(int j = 0; j < direcciones.size(); j++) {
+			Direccion direccion = direcciones.get(j);
+			direccion.setPersona(personaSaved);
+			direccionRepository.save(direccion);
+		}
+		
+		if (persona.isValid()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Optional<Persona> findById(Integer id) {
+		return personaRepository.findById(id);
+	}
+
+	public boolean editar(Persona persona) {		
+		if (persona.isValid() && personaRepository.existsById(persona.getIdpersona())) {			
+			List<Telefono> telefonos = persona.getTelefonos();
+			List<Direccion> direcciones = persona.getDireccions();
+			
+			for(int i = 0; i < telefonos.size(); i++) {
+				Telefono telefono = telefonos.get(i);
+				telefono.setPersona(persona);
+				telefonoRepository.save(telefono);
+			}
+			
+			for(int j = 0; j < direcciones.size(); j++) {
+				Direccion direccion = direcciones.get(j);
+				direccion.setPersona(persona);
+				direccionRepository.save(direccion);
+			}
+			
+			personaRepository.save(persona);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean deleteById(int id) {
+		try {
+			personaRepository.deleteById(id);
+			return true;
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+	}
+	
 }

@@ -8,6 +8,8 @@ public interface IPersonaServices {
 	public List<Persona> findAll();
 
 	public void save(Persona p);
+	
+	public void edit(Persona p);
 
 	public Persona findOne(int id);
 

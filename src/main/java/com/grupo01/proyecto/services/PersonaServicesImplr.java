@@ -1,6 +1,7 @@
 package com.grupo01.proyecto.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,15 @@ public class PersonaServicesImplr implements IPersonaServices {
 	}
 
 	@Override
-	@Transactional // Llamada del metodo darDeAltaContacto() de CustomRepository
+	@Transactional
 	public void save(Persona persona) {
-		// clienteDao.save(cliente);
-		personaDaoCust.darDeAltaContacto(persona);
+		personaDaoCust.create(persona);
+	}
+	
+	@Override
+	@Transactional
+	public void edit(Persona persona) {
+		personaDaoCust.editar(persona);
 	}
 	
 	@Override
@@ -42,7 +48,7 @@ public class PersonaServicesImplr implements IPersonaServices {
 	@Override
 	@Transactional(readOnly = true)
 	public Persona findOne(int id) {
-		return clienteDao.findById(id).orElse(null);
+		return personaDaoCust.findById(id).orElse(null);
 	}
 
 	@Override

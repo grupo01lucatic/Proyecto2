@@ -1,6 +1,7 @@
 package com.grupo01.proyecto.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -89,6 +90,8 @@ public class HomeController {
 	public String crear(Model model) {
 		model.addAttribute("persona", new Persona());
 		model.addAttribute("telefono", new Telefono());
+		Iterable<Provincia> provincias = provinciaservice.findAll();
+		model.addAttribute("provincias", provincias);
 		logger.info("-- iniciada pagina de crear contacto");
 		return "CrearContacto";
 	}
@@ -153,23 +156,30 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editarContacto(@PathVariable(value = "id") Integer id, Model model) {
-		Persona persona = null;
-		persona = personaservice.findOne(id);
+		Persona persona = personaservice.findOne(id);
 		model.addAttribute("persona", persona);
 		logger.info("-- iniciada pagina de editar contacto");
 		return "EditarContacto";
 	}
 
 	/**
-	 * @author Santiago Villar Calvo: 16.05.2019 Sobreescribe el usuario en la DB.
+	 * @author Saghi: 16.05.2019 Sobreescribe el usuario en la DB.
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String editarContacto(@ModelAttribute Persona persona, @PathVariable int id) {
-		personaservice.delete(id);
-		personaservice.save(persona);
-		logger.info("Contacto modificado");
-		return "redirect:/ListarContactos";
+	public String editarContacto(Model modelo, @PathVariable int id) {
+		Persona persona = personaservice.findOne(id);
+		if (persona.isValid()) {
+			modelo.addAttribute("persona", persona);
+
+			Iterable<Provincia> provincias = provinciaservice.findAll();
+			modelo.addAttribute("provincias", provincias);
+			logger.info("Contacto modificado");
+			return "redirect:/ListarContactos";
+		} else {
+			return "redirect:/404";
+		}
+
 	}
 
 	/**
