@@ -37,6 +37,13 @@ public class PersonaServicesImplr implements IPersonaServices {
 	public void edit(Persona persona) {
 		personaDaoCust.editar(persona);
 	}
+	
+	@Override
+	@Transactional // Llamada del metodo save() de JpaRepository
+	public void saveJpaRepository(Persona persona) {
+		// clienteDao.save(cliente);
+		clienteDao.save(persona);
+	}
 
 	@Override
 	@Transactional(readOnly = true)

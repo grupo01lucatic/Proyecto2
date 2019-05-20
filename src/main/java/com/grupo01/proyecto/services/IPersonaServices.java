@@ -14,4 +14,6 @@ public interface IPersonaServices {
 	public Persona findOne(int id);
 
 	public void delete(int id);
+
+	void saveJpaRepository(Persona persona);
 }
