@@ -1,7 +1,7 @@
 package com.grupo01.proyecto.services;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,38 +19,41 @@ public class PersonaServicesImplr implements IPersonaServices {
 
 	@Autowired
 	private PersonaDaoCust personaDaoCust;
-
+	
+	/** Metodo de JpaRepository que devuelve una lista con todos los contactos */
 	@Override
-	@Transactional(readOnly = true) // Solo Consultas
+	@Transactional(readOnly = true) 
 	public List<Persona> findAll() {
 		return (List<Persona>) clienteDao.findAll();
 	}
-
+    
+	/** Metodo save de PersonaDaoCustom que añade un objeto tipo persona con sus asociaciones a las de mas tablas*/
 	@Override
 	@Transactional
 	public void save(Persona persona) {
 		personaDaoCust.create(persona);
 	}
-	
+	/** Llamada del metodo save de PersonaDaoCustom*/
 	@Override
 	@Transactional
 	public void edit(Persona persona) {
 		personaDaoCust.editar(persona);
 	}
-	
+	/** Llamada del metodo save de JpaRepository*/
 	@Override
-	@Transactional // Llamada del metodo save() de JpaRepository
+	@Transactional 
 	public void saveJpaRepository(Persona persona) {
 		// clienteDao.save(cliente);
 		clienteDao.save(persona);
 	}
-
+	/** Metodo de PersonaDaoCustom que busca la id introducida para poder editarlos y mostrar sus detalles */
 	@Override
 	@Transactional(readOnly = true)
 	public Persona findOne(int id) {
 		return personaDaoCust.findById(id).orElse(null);
 	}
-
+	
+	/** Metodo de JpaRepository que busca la id introducida y elimina todos los campos asociados a esa id */
 	@Override
 	@Transactional
 	public void delete(int id) {

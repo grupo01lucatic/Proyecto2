@@ -12,10 +12,14 @@ import com.grupo01.proyecto.model.Persona;
 import com.grupo01.proyecto.model.Telefono;
 
 
+/**
+ * @author admin
+ *
+ */
 @Component
 public class PersonaDaoCust {
 	@Autowired
-	private PersonaRepository personaRepository;
+	private PersonaDao personaRepository;
 	
 	@Autowired
 	private TelefonoRepository telefonoRepository;
@@ -23,10 +27,18 @@ public class PersonaDaoCust {
 	@Autowired
 	private DireccionRepository direccionRepository;
 
+	/**
+	 * @return
+	 */
 	public Iterable<Persona> findAll() {
 		return personaRepository.findAll();
 	}
 
+	/**Metodo de JpaRepository Persona, Telefono, Direccion que añade un nuevo contacto a la tabla persona y las
+	 * tablas asociadas a la id de esta persona.
+	 * @param persona
+	 * @return
+	 */
 	public boolean create(Persona persona) {		
 		Persona personaSaved = personaRepository.save(persona);
 		
@@ -52,10 +64,18 @@ public class PersonaDaoCust {
 		}
 	}
 
+	/**Metodo de JpaReposturory que busca la id de una persona y devuelve todos sus campos
+	 * @param id
+	 * @return Optional
+	 */
 	public Optional<Persona> findById(Integer id) {
 		return personaRepository.findById(id);
 	}
 
+	/**Metodo de JpaRepository Persona, Telefono, Direccion que busca la id de un contacto y devuelve todos sus campos
+	 * @param persona
+	 * @return
+	 */
 	public boolean editar(Persona persona) {		
 		if (persona.isValid() && personaRepository.existsById(persona.getIdpersona())) {			
 			List<Telefono> telefonos = persona.getTelefonos();
@@ -79,7 +99,12 @@ public class PersonaDaoCust {
 			return false;
 		}
 	}
-
+	
+	/**Metodo de JpaRepository Persona, Telefono, Direccion que busca la id de un contacto y elimina todos los campos
+	 * relacionados con esa id.
+	 * @param id
+	 * @return
+	 */
 	public boolean deleteById(int id) {
 		try {
 			personaRepository.deleteById(id);
