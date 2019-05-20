@@ -123,7 +123,7 @@ public class HomeController {
 			persona = personaservice.findOne(id);
 		} else {
 			return "redirect:/Index";
-			return "redirect:/";
+		
 		}
 		model.put("persona", persona);
 		model.put("titulo", "Detalles del Contacto");
