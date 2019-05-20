@@ -26,10 +26,17 @@ public class PersonaServicesImplr implements IPersonaServices {
 	}
 
 	@Override
-	@Transactional // Actualiza la tabla
+	@Transactional // Llamada del metodo darDeAltaContacto() de CustomRepository
 	public void save(Persona persona) {
 		// clienteDao.save(cliente);
 		personaDaoCust.darDeAltaContacto(persona);
+	}
+	
+	@Override
+	@Transactional // Llamada del metodo save() de JpaRepository
+	public void saveJpaRepository(Persona persona) {
+		// clienteDao.save(cliente);
+		clienteDao.save(persona);
 	}
 
 	@Override
