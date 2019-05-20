@@ -227,7 +227,7 @@ public class HomeController {
 	@GetMapping("/irAltaProvincias")
 	public String createProvincia() {
 		logger.info("--Iniciada pagina para provincia nueva");
-		return "redirect:/AltaProvincias";
+		return "redirect:/CrearProvincias";
 	}
 
 	/**
