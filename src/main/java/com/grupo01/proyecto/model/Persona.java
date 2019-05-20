@@ -141,4 +141,20 @@ public class Persona implements Serializable {
 		return telefono;
 	}
 
+	public boolean isValid() {
+		if (nombre == null || nombre.trim().length() < 1) {
+			return false;
+		}
+
+		if (apellido1 == null || apellido1.trim().length() < 1) {
+			return false;
+		}
+
+		if (apellido2 == null || apellido2.trim().length() < 1) {
+			return false;
+		}
+
+		return true;
+	}
+
 }

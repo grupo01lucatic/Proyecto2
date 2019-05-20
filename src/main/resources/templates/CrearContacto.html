@@ -1,133 +1,78 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Alta nuevo usuario</title>
-    <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="../static/stilos.css">
-<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/stilos.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 </head>
+
 <body>
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-       <i class="far fa-address-card"></i>
-       <a class="navbar-brand" th:href="@{/}"> Agenda</a>
-   </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <i class="far fa-address-card"></i>
+        <a class="navbar-brand" th:href="@{/}"> Agenda</a>
+    </nav>
     <main role="main" class="flex-shrink-0">
-		<div class="container">
-		    <h1>Crear un contacto nuevo</h1>
-			
-			<form th:action="@{/createContacto}" th:object="${persona}"
-				method="post">
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="inputNombre">Nombre</label>
-						<input type="text" class="form-control" id="inputNombre" placeholder="Nombre" th:field="*{nombre}">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputApellido1">Primer Apellido</label>
-						<input type="text" class="form-control" id="inputApellido1" placeholder="Primer apellido" th:field="*{apellido1}">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputApellido2">Segundo Apellido</label>
-						<input type="text" class="form-control" id="inputApellido2" placeholder="Segundo apellido" th:field="*{apellido2}">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputDni">DNI</label>
-						<input type="text" class="form-control" id="inputDni" placeholder="DNI" th:field="*{dni}">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputFechadenacimiento">Fecha de nacimiento</label>
-						<input type="text" class="form-control" id="inputFechadenacimiento" placeholder="Fecha de nacimiento" th:field="*{fechanacimiento}">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputTelefono">Telefono</label>
-						<input type="text" class="form-control" id="inputTelefono" placeholder="Telefono" th:field="*{telefonos[0].telefono}">
-					</div>
-					
-					<div class="form-group col-md-6">
-						<label for="inputTelefono">Codigo postal</label>
-						<input type="text" class="form-control" id="inputCodPostal" placeholder="Codigo Postal" th:field="*{direccions[0].codpostal}">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputTelefono">Direccion</label>
-						<input type="text" class="form-control" id="inputDireccion" placeholder="Direccion" th:field="*{direccions[0].direccion}">
-					</div>
-					<div class="form-group col-md-6">
-						<label for="inputTelefono">Localidad</label>
-						<input type="text" class="form-control" id="inputLocalidad" placeholder="Localidad" th:field="*{direccions[0].localidad}">
-					</div>
-					<div class="form-group col-md-6">
-                        <label for="inputTelefono">Provincia</label>
-					    <select class="form-control" th:field="*{direccions[0].provincia.provincia}">
-                              <option value="null">Seleccione provincia</option>
-                              <option value="null">Álava (Araba)(País Vasco,ES)</option>
-                              <option value="null">Albacete (Castilla-La Mancha,ES)</option>
-                              <option value="null">Alicante (Comunidad Valenciana,ES)</option>
-                              <option value="null">Almería (Andalucía,ES)</option>
-                              <option value="null">Asturias (Principado de Asturias,ES)</option>
-                              <option value="null">Ávila (Castilla y León,ES)</option>
-                              <option value="null">Badajoz (Extremadura,ES)</option>
-                              <option value="null">Barcelona (Cataluña,ES)</option>
-                              <option value="null">Burgos (Castilla y León,ES)</option>
-                              <option value="null">Cáceres (Extremadura,ES)</option>
-                              <option value="null">Cádiz (Andalucía,ES)</option>
-                              <option value="null">Cantabria (Cantabria,ES)</option>
-                              <option value="null">Castellón (Comunidad Valenciana,ES)</option>
-                              <option value="null">Ciudad Real (Castilla-La Mancha,ES)</option>
-                              <option value="null">Córdoba (Andalucía,ES)</option>
-                              <option value="null">Cuenca (Castilla-La Mancha,ES)</option>
-                              <option value="null">Córdoba (Andalucía,ES)</option>
-                              <option value="null">Gerona (Girona) (Cataluña,ES)</option>
-                              <option value="null">Granada (Andalucía,ES)</option>
-                              <option value="null">Guadalajara (Castilla-La Mancha,ES)</option>
-                              <option value="null">Guipúzcoa (Gipuzkoa) (País Vasco,ES)</option>
-                              <option value="null">Huelva (Andalucía,ES)</option>
-                              <option value="null">Huesca (Aragon,ES)</option>
-                              <option value="null">Islas Baleares (Islas Baleares,ES)</option>
-                              <option value="null">Jaén (Andalucía,ES)</option>
-                              <option value="null">La Coruña (A Coruña) (Galicia,ES)</option>
-                              <option value="null">La Rioja (La Rioja,ES)</option>
-                              <option value="null">Las Palmas (Canarias,ES)</option>
-                              <option value="null">León (Castilla y León,ES)</option>
-                              <option value="null">Lérida (Lleida) (Cataluña,ES)</option>
-                              <option value="null">Madrid (Comunidad de Madrid,ES)</option>
-                              <option value="null">Málaga (Andalucía,ES)</option>
-                              <option value="null">Murcia (Región de Murcia,ES)</option>
-                              <option value="null">Navarra (Comunidad Foral de Navarra,ES)</option>
-                              <option value="null">Orense (Ourense) (Galicia,ES)</option>
-                              <option value="null">Palencia (Castilla y León,ES)</option>
-                              <option value="null">Pontevedra (Galicia,ES)</option>
-                              <option value="null">Salamanca (Castilla y León,ES)</option>
-                              <option value="null">Segovia (Castilla y León,ES)</option>
-                              <option value="null">Sevilla (Andalucía,ES)</option>
-                              <option value="null">Soria (Castilla y León,ES)</option>
-                              <option value="null">Tarragona (Cataluña,ES)</option>
-                              <option value="null">Tenerife (Canarias,ES)</option>
-                              <option value="null">Teruel (Aragon,ES)</option>
-                              <option value="null">Toledo (Castilla-La Mancha,ES)</option>
-                              <option value="null">Valencia (Comunidad Valenciana,ES)</option>
-                              <option value="null">Valladolid (Castilla y León,ES)</option>
-                              <option value="null">Vizcaya (Bizkaia) (País Vasco,ES)</option>
-                              <option value="null">Zamora (Castilla y León,ES)</option>
-                              <option value="null">Zaragoza (Aragon,ES)</option>       
+        <div class="container">
+            <h1>Crear un contacto nuevo</h1>
+
+            <form th:action="@{/createContacto}" th:object="${persona}" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputNombre">Nombre</label>
+                        <input type="text" class="form-control" id="inputNombre" placeholder="Nombre" th:field="*{nombre}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputApellido1">Primer Apellido</label>
+                        <input type="text" class="form-control" id="inputApellido1" placeholder="Primer apellido" th:field="*{apellido1}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputApellido2">Segundo Apellido</label>
+                        <input type="text" class="form-control" id="inputApellido2" placeholder="Segundo apellido" th:field="*{apellido2}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputDni">DNI</label>
+                        <input type="text" class="form-control" id="inputDni" placeholder="DNI" th:field="*{dni}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputFechadenacimiento">Fecha de nacimiento</label>
+                        <input type="text" class="form-control" id="inputFechadenacimiento" placeholder="Fecha de nacimiento" th:field="*{fechanacimiento}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputTelefono">Telefono</label>
+                        <input type="text" class="form-control" id="inputTelefono" placeholder="Telefono" th:field="*{telefonos[0].telefono}">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputTelefono">Codigo postal</label>
+                        <input type="text" class="form-control" id="inputCodPostal" placeholder="Codigo Postal" th:field="*{direccions[0].codpostal}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputTelefono">Direccion</label>
+                        <input type="text" class="form-control" id="inputDireccion" placeholder="Direccion" th:field="*{direccions[0].direccion}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputTelefono">Localidad</label>
+                        <input type="text" class="form-control" id="inputLocalidad" placeholder="Localidad" th:field="*{direccions[0].localidad}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputProvincia">Provincia</label>
+                        <input type="hidden" th:field="*{direccions[0].iddireccion}">
+                        <select class="form-control" id="inputProvincia" th:field="*{direccions[0].provincia}">
+                            <option th:each="provincia : ${provincias}" th:value="${provincia.idprovincia}" th:text="${provincia.provincia}"></option>
                         </select>
-					</div>
-				</div>
-				<button type="submit" class="btn btn-primary" th:text="${persona.idpersona} ? 'Editar': 'Crear'">Crear</button>
-			</form>
-		</div>
-	</main>
-	
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                    </div>
+                    <button type="submit" class="btn btn-primary" th:text='Crear'>Crear</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>
