@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -18,8 +20,9 @@ import javax.persistence.OneToMany;
 @NamedQuery(name="Provincia.findAll", query="SELECT p FROM Provincia p")
 public class Provincia implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idprovincia;
 
 	private String provincia;
@@ -27,6 +30,13 @@ public class Provincia implements Serializable {
 	//bi-directional many-to-one association to Direccion
 	@OneToMany(mappedBy="provincia")
 	private List<Direccion> direccions;
+
+	public Provincia(int idprovincia, String provincia, List<Direccion> direccions) {
+		super();
+		this.idprovincia = idprovincia;
+		this.provincia = provincia;
+		this.direccions = direccions;
+	}
 
 	public Provincia() {
 	}
@@ -68,5 +78,13 @@ public class Provincia implements Serializable {
 
 		return direccion;
 	}
+
+	@Override
+	public String toString() {
+		return "Provincia [idprovincia=" + idprovincia + ", provincia=" + provincia + ", direccions=" + direccions
+				+ "]";
+	}
+	
+	
 
 }

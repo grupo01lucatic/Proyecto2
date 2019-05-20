@@ -4,6 +4,8 @@ package com.grupo01.proyecto.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,9 +19,11 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQuery(name="Direccion.findAll", query="SELECT d FROM Direccion d")
 public class Direccion implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int iddireccion;
 
 	private String codpostal;
@@ -39,6 +43,15 @@ public class Direccion implements Serializable {
 	private Provincia provincia;
 
 	public Direccion() {
+	}
+
+	public Direccion(String codpostal, String direccion, String localidad, Persona persona, Provincia provincia) {
+		super();
+		this.codpostal = codpostal;
+		this.direccion = direccion;
+		this.localidad = localidad;
+		this.persona = persona;
+		this.provincia = provincia;
 	}
 
 	public int getIddireccion() {
@@ -87,6 +100,11 @@ public class Direccion implements Serializable {
 
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
+	}
+	@Override
+	public String toString() {
+		return "Direccion [iddireccion=" + iddireccion + ", codpostal=" + codpostal + ", direccion=" + direccion
+				+ ", localidad=" + localidad + ", persona=" + persona + ", provincia=" + provincia + "]";
 	}
 
 }
