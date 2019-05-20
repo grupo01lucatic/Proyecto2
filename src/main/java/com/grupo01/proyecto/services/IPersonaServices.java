@@ -16,4 +16,6 @@ public interface IPersonaServices {
 	public void delete(int id);
 
 	void saveJpaRepository(Persona persona);
+
+	public Iterable<Persona> findByNameOrPhone(String search);
 }
