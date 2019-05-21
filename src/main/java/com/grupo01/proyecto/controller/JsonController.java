@@ -85,13 +85,14 @@ public class JsonController {
 	public Persona detallarContacto(@PathVariable int id) {
 		return servicios.findOne(id);
 	}
+
 	/**
 	 * Servicio REST para añadir provincia
 	 * @author Sagui Shahnavaz
 	 * @date 21.05.2019
 	 * @return void
 	 */
-	
+
 	@PostMapping(path = { "/crearprovincia" })
 	public void anadir(@RequestBody Provincia provincia) {
 		serviciosProvincia.save(provincia);
@@ -113,6 +114,30 @@ public class JsonController {
 	public void update(@PathVariable("id") int id, @RequestBody Provincia provincia) {
 		provincia.setIdprovincia(id);
 		serviciosProvincia.save(provincia);
+	}
+
+	/**
+	 * Servicio REST para listar las provincias
+	 * 
+	 * @author Santiago Villar
+	 * @date 21.05.2019
+	 * @return List<Provincia>
+	 */
+	@GetMapping("/listarprovincias")
+	public List<Provincia> listarProvincias() {
+		return serviciosProvincia.findAll();
+	}
+
+	/**
+	 * Servicio REST para eliminar provincias
+	 * 
+	 * @author Santiago Villar
+	 * @date 21.05.2019
+	 * @return List<Provincia>
+	 */
+	@DeleteMapping("/eliminarprovincia{id}")
+	public void eliminarProvincias(@PathVariable int id) {
+		serviciosProvincia.delete(id);
 	}
 
 }
