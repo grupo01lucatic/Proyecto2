@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo01.proyecto.model.Persona;
+import com.grupo01.proyecto.model.Provincia;
 import com.grupo01.proyecto.services.PersonaServicesImplr;
+import com.grupo01.proyecto.services.ProvinciaServiceImpl;
 
 /**
  * Clase encargada de los servicios REST
@@ -26,6 +29,8 @@ public class JsonController {
 
 	@Autowired
 	PersonaServicesImplr servicios;
+	@Autowired
+	ProvinciaServiceImpl serviciosProvincia;
 
 	/**
 	 * Servicio REST para listar contactos
@@ -79,6 +84,18 @@ public class JsonController {
 	@GetMapping("/detallecontacto{id}")
 	public Persona detallarContacto(@PathVariable int id) {
 		return servicios.findOne(id);
+	}
+	/**
+	 * Servicio REST para añadir provincia
+	 * 
+	 * @author Sagui Shahnavaz
+	 * @date 21.05.2019
+	 * @return void
+	 */
+	
+	@PostMapping(path = { "/crearprovincia" })
+	public void anadir(@RequestBody Provincia provincia) {
+		serviciosProvincia.save(provincia);
 	}
 
 }
