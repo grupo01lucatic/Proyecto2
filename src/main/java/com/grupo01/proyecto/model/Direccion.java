@@ -10,12 +10,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+
 /**
  * The persistent class for the direccion database table.
  * 
  */
 @Entity
 @NamedQuery(name = "Direccion.findAll", query = "SELECT d FROM Direccion d")
+@JsonIgnoreType
 public class Direccion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,11 +37,13 @@ public class Direccion implements Serializable {
 	// bi-directional many-to-one association to Persona
 	@ManyToOne
 	@JoinColumn(name = "idpersona")
+	@JsonIgnore
 	private Persona persona;
 
 	// bi-directional many-to-one association to Provincia
 	@ManyToOne
 	@JoinColumn(name = "idprovincia")
+	@JsonIgnore
 	private Provincia provincia;
 
 	public Direccion() {
