@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -145,8 +146,17 @@ public class HomeController {
 	 * @version 1.0
 	 */
 	@GetMapping("/ListarContactos")
-	public String listarContacto(Model model) {
-		model.addAttribute("personas", personaservice.findAll());
+	public String listarContacto(Model model, @RequestParam(name="search", required=false, defaultValue="") String search) {
+		Iterable<Persona> personas;
+		
+		if(search.trim().length() > 0) {
+			personas = personaservice.findByNameOrPhone(search);
+		} else {
+			personas = personaservice.findAll();
+		}
+		
+		model.addAttribute("personas", personas);
+		
 		logger.info("Se han mostrado los contactos");
 		return "ListarContactos";
 	}

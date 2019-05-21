@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.grupo01.proyecto.dao.PersonaDao;
 import com.grupo01.proyecto.dao.PersonaDaoCust;
+import com.grupo01.proyecto.dao.PersonaRepository;
 import com.grupo01.proyecto.model.Persona;
 
 @Service
@@ -19,6 +20,10 @@ public class PersonaServicesImplr implements IPersonaServices {
 
 	@Autowired
 	private PersonaDaoCust personaDaoCust;
+
+	@Autowired
+	private PersonaRepository personaRepository;
+
 	
 	/** Metodo de JpaRepository que devuelve una lista con todos los contactos */
 	@Override
@@ -58,5 +63,10 @@ public class PersonaServicesImplr implements IPersonaServices {
 	@Transactional
 	public void delete(int id) {
 		clienteDao.deleteById(id);
+	}
+
+	@Override
+	public Iterable<Persona> findByNameOrPhone(String search) {
+		return personaRepository.findByNameOrPhone(search);
 	}
 }
