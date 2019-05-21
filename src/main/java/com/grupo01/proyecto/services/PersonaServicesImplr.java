@@ -62,7 +62,7 @@ public class PersonaServicesImplr implements IPersonaServices {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		clienteDao.deleteById(id);
+		personaDaoCust.deleteById(id);
 	}
 
 	@Override
