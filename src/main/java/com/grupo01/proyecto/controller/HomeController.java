@@ -155,6 +155,12 @@ public class HomeController {
 			personas = personaservice.findAll();
 		}
 		
+		if(search.trim().length() > 0) {
+			personas = personaservice.findPersonaByProvincia(search);
+		} else {
+			personas = personaservice.findAll();
+		}
+		
 		model.addAttribute("personas", personas);
 		
 		logger.info("Se han mostrado los contactos");
@@ -187,9 +193,6 @@ public class HomeController {
 			logger.info("-- Se ha editado el contacto correctamente");
 			return "redirect:/";
 		}
-	
-	
-
 	
 
 	/**

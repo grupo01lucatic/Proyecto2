@@ -39,6 +39,7 @@ public class Direccion implements Serializable {
 	@JoinColumn(name = "idpersona")
 	@JsonIgnore
 	private Persona persona;
+	
 
 	// bi-directional many-to-one association to Provincia
 	@ManyToOne
