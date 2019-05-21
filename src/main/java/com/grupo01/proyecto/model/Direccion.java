@@ -10,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-
 /**
  * The persistent class for the direccion database table.
  * 
@@ -37,14 +34,13 @@ public class Direccion implements Serializable {
 	// bi-directional many-to-one association to Persona
 	@ManyToOne
 	@JoinColumn(name = "idpersona")
-	//@JsonIgnore
+	// @JsonIgnore
 	private Persona persona;
-	
 
 	// bi-directional many-to-one association to Provincia
 	@ManyToOne
 	@JoinColumn(name = "idprovincia")
-	//@JsonIgnore
+	// @JsonIgnore
 	private Provincia provincia;
 
 	public Direccion() {
