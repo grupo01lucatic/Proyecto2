@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,9 +23,11 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
 public class Persona implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idpersona;
 
 	private String apellido1;
@@ -38,11 +42,9 @@ public class Persona implements Serializable {
 
 	private String nombre;
 
-	// bi-directional many-to-one association to Direccion
 	@OneToMany(mappedBy = "persona")
 	private List<Direccion> direccions;
 
-	// bi-directional many-to-one association to Telefono
 	@OneToMany(mappedBy = "persona")
 	private List<Telefono> telefonos;
 
@@ -53,6 +55,16 @@ public class Persona implements Serializable {
 		this.setNombre(nombre);
 		this.setApellido1(apellido1);
 		this.setApellido2(apellido2);
+	public Persona(String apellido1, String apellido2, String dni, Date fechanacimiento, String nombre,
+			List<Direccion> direccions, List<Telefono> telefonos) {
+		super();
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.dni = dni;
+		this.fechanacimiento = fechanacimiento;
+		this.nombre = nombre;
+		this.direccions = direccions;
+		this.telefonos = telefonos;
 	}
 
 	public int getIdpersona() {
@@ -133,6 +145,7 @@ public class Persona implements Serializable {
 		this.telefonos = telefonos;
 	}
 
+
 	public Telefono addTelefono(Telefono telefono) {
 		getTelefonos().add(telefono);
 		telefono.setPersona(this);
@@ -162,5 +175,13 @@ public class Persona implements Serializable {
 
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Persona [idpersona=" + idpersona + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", dni="
+				+ dni + ", fechanacimiento=" + fechanacimiento + ", nombre=" + nombre + ", direccions=" + direccions
+				+ ", telefonos=" + telefonos + "]";
+	}
+	
 
 }

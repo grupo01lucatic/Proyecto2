@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.grupo01.proyecto.model.Persona;
@@ -34,6 +35,7 @@ import com.grupo01.proyecto.services.IProvinciaService;
  *
  */
 @Controller
+@SessionAttributes("persona")
 public class HomeController {
 	@Autowired
 	private IProvinciaService provinciaservice;
@@ -83,7 +85,7 @@ public class HomeController {
 	}
 
 	/**
-	 * @author Ivan Carpio Fecha: 14.05.2019 GET Recibe un objeto de tipo Persona y
+	 * @author Ivan Carpio Fecha: 14.05.2019 GET Descripcion: Recibe un objeto de tipo Persona y
 	 *         lo añade al Map del modelo Persona
 	 * @version 1.0
 	 */
@@ -98,7 +100,7 @@ public class HomeController {
 	}
 
 	/**
-	 * @author Ivan Carpio Fecha: 14.05.2019 Inserta un contacto nuevo a la base de
+	 * @author Ivan Carpio Fecha: 14.05.2019 Descripcion: Inserta un contacto nuevo a la base de
 	 *         datos cuando pulsas el boton Crear de la vista createuser.Si hay
 	 *         algun error retorna al formulario y si todo es correcto redirige a la
 	 *         raiz.
@@ -106,15 +108,15 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/createContacto", method = RequestMethod.POST)
 	// @Valid, BindingResult necesarios para validar los campos
-	public String guardar(@ModelAttribute Persona cliente, BindingResult result, Model model, SessionStatus status) {
-		personaservice.save(cliente);
+	public String guardar(@ModelAttribute Persona persona, BindingResult result, Model model, SessionStatus status) {
+		personaservice.save(persona);
 		status.setComplete();
 		logger.info("-- creado contacto");
 		return "redirect:/";
 	}
 
 	/**
-	 * @author Ivan Carpio Fecha: 14.05.2019 Muestra todos los datos asociados al
+	 * @author Ivan Carpio Fecha: 14.05.2019 Descripcion: Muestra todos los datos asociados al
 	 *         contacto, que coincida con la id y los inyecta en la vista
 	 *         /Detalle/id ,el titulo de la pagina y el nombre del contacto en la
 	 *         pestaña.
@@ -168,6 +170,8 @@ public class HomeController {
 	public String editarContacto(@PathVariable(value = "id") Integer id, Model model) {
 		Persona persona = personaservice.findOne(id);
 		model.addAttribute("persona", persona);
+		Iterable<Provincia> provincias = provinciaservice.findAll();
+		model.addAttribute("provincias", provincias);
 		logger.info("-- iniciada pagina de editar contacto");
 		return "EditarContacto";
 	}
@@ -176,21 +180,17 @@ public class HomeController {
 	 * @author Saghi: 16.05.2019 Sobreescribe el usuario en la DB.
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String editarContacto(Model modelo, @PathVariable int id) {
-		Persona persona = personaservice.findOne(id);
-		if (persona.isValid()) {
-			modelo.addAttribute("persona", persona);
-
-			Iterable<Provincia> provincias = provinciaservice.findAll();
-			modelo.addAttribute("provincias", provincias);
-			logger.info("Contacto modificado");
-			return "redirect:/ListarContactos";
-		} else {
-			return "redirect:/404";
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST) 
+		public String editar(@ModelAttribute Persona persona, BindingResult result, Model model, SessionStatus status) {
+			personaservice.save(persona);
+			status.setComplete();
+			logger.info("-- Se ha editado el contacto correctamente");
+			return "redirect:/";
 		}
+	
+	
 
-	}
+	
 
 	/**
 	 * Metodo para eliminar un contacto al darle click en el boton que llama al
@@ -237,7 +237,7 @@ public class HomeController {
 	@GetMapping("/irAltaProvincias")
 	public String createProvincia() {
 		logger.info("--Iniciada pagina para provincia nueva");
-		return "redirect:/AltaProvincias";
+		return "redirect:/CrearProvincias";
 	}
 
 	/**

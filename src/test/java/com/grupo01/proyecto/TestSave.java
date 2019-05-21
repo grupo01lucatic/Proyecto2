@@ -1,6 +1,7 @@
 package com.grupo01.proyecto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +19,9 @@ import com.grupo01.proyecto.services.IPersonaServices;
 public class TestSave {
 
 	/**
-	 * Metodo que compreba si se guarda un ser humano o algo similar en la tabla
-	 * persona de la base de datos
-	 * 
+	 * Junit que comprueba que se guarda una la tabla persona una persona, se comprueba con
+	 * otro objeto Persona que tenga la id de la primera persona y si son iguales es correcto 
+	 * que se haya guardado. Despues de la comprobacion elimina la persona que se ha creado de la tabla.
 	 * @autor: Ivan Carpio
 	 * @version: v1
 	 * @date: 16.05.2019
@@ -32,15 +33,15 @@ public class TestSave {
 	
 	@Test
 	public void testGuardaryBorrar() throws Exception {
-		persona.setIdpersona(100);
-		persona.setNombre("@Test");
-		persona.setApellido1("@Test");
-		persona.setApellido2("@Test");
+		persona.setNombre("Lucatic");
+		persona.setApellido1("Lucatic");
 		personaservice.saveJpaRepository(persona);
-		logger.info("--------> Ser de prueba Guardado <<< "  + persona.getNombre() + " <<");
-		personaservice.delete(100);
-		logger.info("Borrado de Ser de prueba completado con exito" );
-	
+		logger.info("-------->  Guardado ok <<< "  + persona.getIdpersona() + " <<");
+		Persona person = new Persona();
+		person.setIdpersona(persona.getIdpersona());
+		assertEquals(persona.getIdpersona(), person.getIdpersona());
+		personaservice.delete(persona.getIdpersona());
+		
 	}
 
 	
