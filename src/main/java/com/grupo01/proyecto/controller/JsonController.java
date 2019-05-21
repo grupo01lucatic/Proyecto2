@@ -88,7 +88,6 @@ public class JsonController {
 
 	/**
 	 * Servicio REST para añadir provincia
-	 * 
 	 * @author Sagui Shahnavaz
 	 * @date 21.05.2019
 	 * @return void
@@ -96,6 +95,24 @@ public class JsonController {
 
 	@PostMapping(path = { "/crearprovincia" })
 	public void anadir(@RequestBody Provincia provincia) {
+		serviciosProvincia.save(provincia);
+	}
+	
+	/**
+	 * Servicio REST para modificiar provincia
+	 * @author Sagui Shahnavaz
+	 * @date 21.05.2019
+	 * @return void
+	 */
+	
+	@GetMapping(path = { "/editarProvincia{id}" })
+	public Provincia anadir(@PathVariable("id") int id) {
+		return serviciosProvincia.findOne(id);
+	}
+
+	@PutMapping(path = { "/editarProvincia{id}" })
+	public void update(@PathVariable("id") int id, @RequestBody Provincia provincia) {
+		provincia.setIdprovincia(id);
 		serviciosProvincia.save(provincia);
 	}
 

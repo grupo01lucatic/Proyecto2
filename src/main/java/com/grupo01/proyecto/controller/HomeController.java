@@ -144,18 +144,19 @@ public class HomeController {
 	 *         ListarContactos
 	 * @version 1.0
 	 */
+	
+	/**
+	 * @author Sagui Shahnavaz 
+	 * Fecha: 20.05.2019
+	 * Buscador en la lista contactos 
+	 * @version 1.0
+	 */
 	@GetMapping("/ListarContactos")
 	public String listarContacto(Model model, @RequestParam(name="search", required=false, defaultValue="") String search) {
 		Iterable<Persona> personas;
 		
 		if(search.trim().length() > 0) {
 			personas = personaservice.findByNameOrPhone(search);
-		} else {
-			personas = personaservice.findAll();
-		}
-		
-		if(search.trim().length() > 0) {
-			personas = personaservice.findPersonaByProvincia(search);
 		} else {
 			personas = personaservice.findAll();
 		}

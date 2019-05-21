@@ -21,5 +21,6 @@ public interface IPersonaServices {
 
 	public Iterable<Persona> findByNameOrPhone(String search);
 	
-	public List<Persona> findPersonaByProvincia(String search);
+	
+	//public List<Persona> findPersonaByProvincia(String search);
 }
