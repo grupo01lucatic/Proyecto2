@@ -1,5 +1,6 @@
 package com.grupo01.proyecto.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -7,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.grupo01.proyecto.dao.DireccionRepository;
 import com.grupo01.proyecto.dao.PersonaDao;
 import com.grupo01.proyecto.dao.PersonaDaoCust;
 import com.grupo01.proyecto.dao.PersonaRepository;
+import com.grupo01.proyecto.model.Direccion;
 import com.grupo01.proyecto.model.Persona;
 
 @Service
+@Transactional
 public class PersonaServicesImplr implements IPersonaServices {
 
 	@Autowired
@@ -23,7 +27,12 @@ public class PersonaServicesImplr implements IPersonaServices {
 
 	@Autowired
 	private PersonaRepository personaRepository;
+	
+	@Autowired
+	private ProvinciaServiceImpl provinciaService;
 
+	@Autowired
+	private DireccionRepository direccionRepo;
 	
 	/** Metodo de JpaRepository que devuelve una lista con todos los contactos */
 	@Override
@@ -69,4 +78,28 @@ public class PersonaServicesImplr implements IPersonaServices {
 	public Iterable<Persona> findByNameOrPhone(String search) {
 		return personaRepository.findByNameOrPhone(search);
 	}
+
+	
+	
+	public List<Persona> findPersonaByProvincia(String search){
+		List<Direccion> direcciones = new ArrayList<Direccion>();
+		
+		int idPr = provinciaService.getIdProvincia(search);
+		
+		for (Direccion direccion : direccionRepo.findAll()) {
+			if(direccion.getProvincia().getIdprovincia() == idPr) {
+				direcciones.add(direccion);
+			}
+		}
+		
+		List<Persona> personasConIdProvincia = new ArrayList<Persona>();
+		
+		for (Direccion direccion : direcciones) {
+			personasConIdProvincia.add(direccion.getPersona());
+		}
+		
+		return personasConIdProvincia;
+	}
+	
+
 }

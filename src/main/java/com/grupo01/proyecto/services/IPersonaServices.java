@@ -2,8 +2,10 @@ package com.grupo01.proyecto.services;
 
 import java.util.List;
 
-import com.grupo01.proyecto.model.Persona;
+import org.springframework.stereotype.Service;
 
+import com.grupo01.proyecto.model.Persona;
+@Service
 public interface IPersonaServices {
 	public List<Persona> findAll();
 
@@ -18,4 +20,6 @@ public interface IPersonaServices {
 	void saveJpaRepository(Persona persona);
 
 	public Iterable<Persona> findByNameOrPhone(String search);
+	
+	public List<Persona> findPersonaByProvincia(String search);
 }

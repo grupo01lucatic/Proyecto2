@@ -55,6 +55,7 @@ public class Persona implements Serializable {
 		this.setNombre(nombre);
 		this.setApellido1(apellido1);
 		this.setApellido2(apellido2);
+	}	
 	public Persona(String apellido1, String apellido2, String dni, Date fechanacimiento, String nombre,
 			List<Direccion> direccions, List<Telefono> telefonos) {
 		super();
