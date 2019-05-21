@@ -78,10 +78,11 @@ public class PersonaServicesImplr implements IPersonaServices {
 	public Iterable<Persona> findByNameOrPhone(String search) {
 		return personaRepository.findByNameOrPhone(search);
 	}
+	
 
 	
 	
-	public List<Persona> findPersonaByProvincia(String search){
+	/*public List<Persona> findPersonaByProvincia(String search){
 		List<Direccion> direcciones = new ArrayList<Direccion>();
 		
 		int idPr = provinciaService.getIdProvincia(search);
@@ -100,6 +101,6 @@ public class PersonaServicesImplr implements IPersonaServices {
 		
 		return personasConIdProvincia;
 	}
-	
+	*/
 
 }
