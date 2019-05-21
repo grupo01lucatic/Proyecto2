@@ -1,6 +1,5 @@
 package com.grupo01.proyecto.model;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,24 +10,28 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 /**
  * The persistent class for the provincia database table.
  * 
  */
 @Entity
-@NamedQuery(name="Provincia.findAll", query="SELECT p FROM Provincia p")
+@NamedQuery(name = "Provincia.findAll", query = "SELECT p FROM Provincia p")
+@JsonIgnoreType
 public class Provincia implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idprovincia;
 
 	private String provincia;
 
-	//bi-directional many-to-one association to Direccion
-	@OneToMany(mappedBy="provincia")
+	// bi-directional many-to-one association to Direccion
+	@OneToMany(mappedBy = "provincia")
+	@JsonIgnore
 	private List<Direccion> direccions;
 
 	public Provincia(int idprovincia, String provincia, List<Direccion> direccions) {
@@ -81,10 +84,7 @@ public class Provincia implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Provincia [idprovincia=" + idprovincia + ", provincia=" + provincia + ", direccions=" + direccions
-				+ "]";
+		return "Provincia [idprovincia=" + idprovincia + ", provincia=" + provincia + "]";
 	}
-	
-	
 
 }
