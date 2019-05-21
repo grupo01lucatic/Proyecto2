@@ -38,7 +38,7 @@ public class PersonaServicesImplr implements IPersonaServices {
 	@Override
 	@Transactional(readOnly = true) 
 	public List<Persona> findAll() {
-		return (List<Persona>) clienteDao.findAll();
+		return clienteDao.findAll();
 	}
     
 	/** Metodo save de PersonaDaoCustom que añade un objeto tipo persona con sus asociaciones a las de mas tablas*/
@@ -71,7 +71,7 @@ public class PersonaServicesImplr implements IPersonaServices {
 	@Override
 	@Transactional
 	public void delete(int id) {
-		clienteDao.deleteById(id);
+		personaDaoCust.deleteById(id);
 	}
 
 	@Override
