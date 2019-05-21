@@ -6,12 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.grupo01.proyecto.controller.HomeController;
 import com.grupo01.proyecto.dao.ProvinciaCrud;
 import com.grupo01.proyecto.model.Provincia;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Clase de servicio que llama a los metodos de CRUD del paquete dao
@@ -25,8 +23,9 @@ import org.slf4j.LoggerFactory;
 public class ProvinciaServiceImpl implements IProvinciaService {
 	@Autowired
 	private ProvinciaCrud provinciacrud;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(ProvinciaServiceImpl.class);
+
 	/**
 	 * @author Santiago Villar
 	 * @date 16.05.2019
@@ -80,16 +79,15 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 		provinciacrud.deleteById(id);
 	}
 
-	
 	public int getIdProvincia(String provincia) {
 		List<Provincia> provincias = provinciacrud.findAll();
-		
+
 		for (Provincia provincia2 : provincias) {
-			if (provincia2.getProvincia().equalsIgnoreCase(provincia)) 
+			if (provincia2.getProvincia().equalsIgnoreCase(provincia))
 				return provincia2.getIdprovincia();
 		}
-		
-	return 0;
+
+		return 0;
 	}
-	
+
 }

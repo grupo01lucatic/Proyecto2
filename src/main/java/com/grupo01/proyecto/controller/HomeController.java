@@ -84,8 +84,8 @@ public class HomeController {
 	}
 
 	/**
-	 * @author Ivan Carpio Fecha: 14.05.2019 GET Descripcion: Recibe un objeto de tipo Persona y
-	 *         lo añade al Map del modelo Persona
+	 * @author Ivan Carpio Fecha: 14.05.2019 GET Descripcion: Recibe un objeto de
+	 *         tipo Persona y lo añade al Map del modelo Persona
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "/createContacto", method = RequestMethod.GET)
@@ -99,10 +99,10 @@ public class HomeController {
 	}
 
 	/**
-	 * @author Ivan Carpio Fecha: 14.05.2019 Descripcion: Inserta un contacto nuevo a la base de
-	 *         datos cuando pulsas el boton Crear de la vista createuser.Si hay
-	 *         algun error retorna al formulario y si todo es correcto redirige a la
-	 *         raiz.
+	 * @author Ivan Carpio Fecha: 14.05.2019 Descripcion: Inserta un contacto nuevo
+	 *         a la base de datos cuando pulsas el boton Crear de la vista
+	 *         createuser.Si hay algun error retorna al formulario y si todo es
+	 *         correcto redirige a la raiz.
 	 * @version 1.0
 	 */
 	@RequestMapping(value = "/createContacto", method = RequestMethod.POST)
@@ -115,10 +115,10 @@ public class HomeController {
 	}
 
 	/**
-	 * @author Ivan Carpio Fecha: 14.05.2019 Descripcion: Muestra todos los datos asociados al
-	 *         contacto, que coincida con la id y los inyecta en la vista
-	 *         /Detalle/id ,el titulo de la pagina y el nombre del contacto en la
-	 *         pestaña.
+	 * @author Ivan Carpio Fecha: 14.05.2019 Descripcion: Muestra todos los datos
+	 *         asociados al contacto, que coincida con la id y los inyecta en la
+	 *         vista /Detalle/id ,el titulo de la pagina y el nombre del contacto en
+	 *         la pestaña.
 	 * @version 1.0
 	 */
 
@@ -144,25 +144,24 @@ public class HomeController {
 	 *         ListarContactos
 	 * @version 1.0
 	 */
-	
+
 	/**
-	 * @author Sagui Shahnavaz 
-	 * Fecha: 20.05.2019
-	 * Buscador en la lista contactos 
+	 * @author Sagui Shahnavaz Fecha: 20.05.2019 Buscador en la lista contactos
 	 * @version 1.0
 	 */
 	@GetMapping("/ListarContactos")
-	public String listarContacto(Model model, @RequestParam(name="search", required=false, defaultValue="") String search) {
+	public String listarContacto(Model model,
+			@RequestParam(name = "search", required = false, defaultValue = "") String search) {
 		Iterable<Persona> personas;
-		
-		if(search.trim().length() > 0) {
+
+		if (search.trim().length() > 0) {
 			personas = personaservice.findByNameOrPhone(search);
 		} else {
 			personas = personaservice.findAll();
 		}
-		
+
 		model.addAttribute("personas", personas);
-		
+
 		logger.info("Se han mostrado los contactos");
 		return "ListarContactos";
 	}
@@ -186,14 +185,13 @@ public class HomeController {
 	 * @author Saghi: 16.05.2019 Sobreescribe el usuario en la DB.
 	 * @version 1.0
 	 */
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST) 
-		public String editar(@ModelAttribute Persona persona, BindingResult result, Model model, SessionStatus status) {
-			personaservice.save(persona);
-			status.setComplete();
-			logger.info("-- Se ha editado el contacto correctamente");
-			return "redirect:/";
-		}
-	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+	public String editar(@ModelAttribute Persona persona, BindingResult result, Model model, SessionStatus status) {
+		personaservice.save(persona);
+		status.setComplete();
+		logger.info("-- Se ha editado el contacto correctamente");
+		return "redirect:/";
+	}
 
 	/**
 	 * Metodo para eliminar un contacto al darle click en el boton que llama al

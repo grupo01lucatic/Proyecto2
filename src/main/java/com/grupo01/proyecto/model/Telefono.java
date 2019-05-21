@@ -10,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-
 /**
  * The persistent class for the telefono database table.
  * 
@@ -21,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreType;
 @NamedQuery(name = "Telefono.findAll", query = "SELECT t FROM Telefono t")
 //@JsonIgnoreType
 public class Telefono implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,7 +30,7 @@ public class Telefono implements Serializable {
 	// bi-directional many-to-one association to Persona
 	@ManyToOne
 	@JoinColumn(name = "idpersona")
-	//@JsonIgnore
+	// @JsonIgnore
 	private Persona persona;
 
 	public Telefono() {
@@ -68,11 +65,10 @@ public class Telefono implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+
 	@Override
 	public String toString() {
 		return "Telefono [idtelefono=" + idtelefono + ", telefono=" + telefono + "]";
 	}
-
-
 
 }
