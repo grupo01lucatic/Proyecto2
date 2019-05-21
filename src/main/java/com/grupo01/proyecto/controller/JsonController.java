@@ -111,4 +111,16 @@ public class JsonController {
 		return serviciosProvincia.findAll();
 	}
 
+	/**
+	 * Servicio REST para eliminar provincias
+	 * 
+	 * @author Santiago Villar
+	 * @date 21.05.2019
+	 * @return List<Provincia>
+	 */
+	@DeleteMapping("/eliminarprovincia{id}")
+	public void eliminarProvincias(@PathVariable int id) {
+		serviciosProvincia.delete(id);
+	}
+
 }
