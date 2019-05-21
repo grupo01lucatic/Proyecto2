@@ -49,4 +49,16 @@ public class JsonController {
 		servicios.delete(id);
 	}
 	
+	/**
+	 * Servicio REST para detalle de un contacto
+	 * 
+	 * @author Santiago Villar
+	 * @date 21.05.2019
+	 * @return Persona
+	 */
+	@GetMapping("/detallecontacto{id}")
+	public Persona detallarContacto(@PathVariable int id) {
+		return servicios.findOne(id);
+	}
+	
 }
