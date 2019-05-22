@@ -147,6 +147,17 @@ public class JsonController {
 	}
 
 	/**
+	 * Servicio REST para crear contacto
+	 * @date 22.05.2019
+	 * @autor Jara Dominguez
+	 * @param persona
+	 */
+	@PutMapping(path = { "/crearcontacto" })
+	public void anadirContacto(@RequestBody Persona persona) {
+		servicios.save(persona);
+	}
+
+  /**
 	 * Servicio REST para buscar contactos
 	 * 
 	 * @author Santiago Villar
