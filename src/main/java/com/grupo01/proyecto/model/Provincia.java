@@ -10,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-
 /**
  * The persistent class for the provincia database table.
  * 
@@ -31,7 +28,7 @@ public class Provincia implements Serializable {
 
 	// bi-directional many-to-one association to Direccion
 	@OneToMany(mappedBy = "provincia")
-	//@JsonIgnore
+	// @JsonIgnore
 	private List<Direccion> direccions;
 
 	public Provincia(int idprovincia, String provincia, List<Direccion> direccions) {
