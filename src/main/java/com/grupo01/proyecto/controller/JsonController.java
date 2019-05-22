@@ -2,6 +2,8 @@ package com.grupo01.proyecto.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +33,8 @@ public class JsonController {
 	PersonaServicesImplr servicios;
 	@Autowired
 	ProvinciaServiceImpl serviciosProvincia;
+
+	private static final Logger logger = LoggerFactory.getLogger(JsonController.class);
 
 	/**
 	 * Servicio REST para listar contactos
@@ -94,7 +98,7 @@ public class JsonController {
 	 * @return void
 	 */
 
-	@PostMapping(path = { "/crearprovincia" })
+	@PostMapping(path = { "/provincias" })
 	public void anadir(@RequestBody Provincia provincia) {
 		serviciosProvincia.save(provincia);
 	}
@@ -112,7 +116,7 @@ public class JsonController {
 		return serviciosProvincia.findOne(id);
 	}
 
-	@PutMapping(path = { "/editarProvincia{id}" })
+	@PutMapping(path = { "/provincias/{id}" })
 	public void update(@PathVariable("id") int id, @RequestBody Provincia provincia) {
 		provincia.setIdprovincia(id);
 		serviciosProvincia.save(provincia);
@@ -152,4 +156,27 @@ public class JsonController {
 	public void anadirContacto(@RequestBody Persona persona) {
 		servicios.save(persona);
 	}
+
+  /**
+	 * Servicio REST para buscar contactos
+	 * 
+	 * @author Santiago Villar
+	 * @date 21.05.2019
+	 * @return List<Persona>
+	 */
+	@GetMapping("/BuscarContactos{contacto}")
+	public List<Persona> listarContacto(@PathVariable String contacto) {
+		List<Persona> personas;
+
+		if (contacto.trim().length() > 0) {
+			personas = (List<Persona>) servicios.findByNameOrPhone(contacto);
+			logger.info("Se ha encontrado el contacto");
+			return personas;
+		} else {
+			personas = servicios.findAll();
+			logger.info("No se han encontrado los contactos");
+			return personas;
+		}
+	}
+
 }
