@@ -93,7 +93,7 @@ public class JsonController {
 	 * @return void
 	 */
 
-	@PostMapping(path = { "/crearprovincia" })
+	@PostMapping(path = { "/provincias" })
 	public void anadir(@RequestBody Provincia provincia) {
 		serviciosProvincia.save(provincia);
 	}
@@ -105,12 +105,12 @@ public class JsonController {
 	 * @return void
 	 */
 	
-	@GetMapping(path = { "/editarProvincia{id}" })
+	@GetMapping(path = { "/provincias/{id}" })
 	public Provincia anadir(@PathVariable("id") int id) {
 		return serviciosProvincia.findOne(id);
 	}
 
-	@PutMapping(path = { "/editarProvincia{id}" })
+	@PutMapping(path = { "/provincias/{id}" })
 	public void update(@PathVariable("id") int id, @RequestBody Provincia provincia) {
 		provincia.setIdprovincia(id);
 		serviciosProvincia.save(provincia);
