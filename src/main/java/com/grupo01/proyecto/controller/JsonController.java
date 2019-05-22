@@ -142,4 +142,14 @@ public class JsonController {
 		serviciosProvincia.delete(id);
 	}
 
+	/**
+	 * Servicio REST para crear contacto
+	 * @date 22.05.2019
+	 * @autor Jara Dominguez
+	 * @param persona
+	 */
+	@PutMapping(path = { "/crearcontacto" })
+	public void anadirContacto(@RequestBody Persona persona) {
+		servicios.save(persona);
+	}
 }
